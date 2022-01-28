@@ -1,0 +1,9 @@
+export const ADD_CARD = 'ADD_CARD';
+export const MODIFY_CARD = 'MODIFY_CARD';
+export const REMOVE_CARD = 'REMOVE_CARD';
+export const ADD_LIST = 'ADD_LIST';
+export const RENAME_LIST = 'RENAME_LIST';
+export const REMOVE_LIST = 'REMOVE_LIST';
+export const ADD_BOARD = 'ADD_BOARD';
+export const RENAME_BOARD = 'RENAME_BOARD';
+export const REMOVE_BOARD = 'DELETE_BOARD';

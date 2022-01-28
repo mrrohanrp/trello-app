@@ -13,16 +13,16 @@ const Board = () => {
           <h3>Board</h3>
           <div className="row">
             <div className="col-auto">
-              <List title="To Do" cards={['todo1', 'todo2']} />
+              <List board="temp" name="To Do" />
             </div>
             <div className="col-auto">
-              <List title="Pending" cards={['single card for 2nd title']} />
+              <List board="temp" name="Pending" />
             </div>
             <div className="col-auto">
-              <List title="With no cards" />
+              <List board="temp" name="With no cards" />
             </div>
             <div className="col-auto">
-              <List title="Done" />
+              <List board="temp" name="Done" />
             </div>
           </div>
         </div>

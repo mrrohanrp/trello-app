@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import CardDisplay from './CardDisplay';
 import CardInput from './CardInput';
+import styles from './List.module.scss';
 
 const List = (props) => {
   const [adding, setAdding] = useState(false);
@@ -17,10 +18,12 @@ const List = (props) => {
 
   const handleSaveCard = (e) => {
     if ((e.type === 'keypress' && e.key === 'Enter') || e.type === 'click') {
-      const prevCards = cards.slice();
-      inputRef.current.value = null;
-      if (newCard) prevCards.push(newCard);
-      setCards(prevCards);
+      if (newCard) {
+        const prevCards = cards.slice();
+        inputRef.current.value = null;
+        if (newCard) prevCards.push(newCard);
+        setCards(prevCards);
+      }
       e.preventDefault();
     }
   };
@@ -40,7 +43,7 @@ const List = (props) => {
   };
 
   return (
-    <div className="card mb-4">
+    <div className={`${styles.list} card mb-4`}>
       <h6 className="card-title mb-0 ms-3 mt-1">{props.title}</h6>
       <div className="card-body p-2">
         {cards && cards.map((desc) => <CardDisplay key={desc} description={desc} />)}
@@ -74,15 +77,13 @@ const List = (props) => {
         </div>
       ) : (
         <div
-          className="card-footer p-2"
+          className={`${styles.list_footer} card-footer text-secondary p-2`}
           role="button"
           tabIndex={0}
           onKeyPress={handleInputCard}
           onClick={handleInputCard}
         >
-          <p className="card-text text-secondary">
-            {cards?.length ? '+ Add another card' : '+ Add a card'}
-          </p>
+          {cards?.length ? '+ Add another card' : '+ Add a card'}
         </div>
       )}
     </div>
