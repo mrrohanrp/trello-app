@@ -1,0 +1,15 @@
+.card {
+  background-color: #e1e3e6;
+  width: 18rem;
+}
+
+.card-footer {
+  cursor: pointer;
+  &:hover {
+    background-color: #c0c7d1;
+    .card-text {
+      color: darkslategray !important;
+      text-decoration: underline;
+    }
+  }
+}

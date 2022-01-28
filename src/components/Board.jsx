@@ -1,0 +1,39 @@
+import React from 'react';
+import List from './List';
+import styles from './Board.module.scss';
+
+const Board = () => {
+  return (
+    <div className={`${styles.board} d-flex flex-column bg-dark`}>
+      <div className="container text-center text-light">
+        <h2>Trello</h2>
+      </div>
+      <div className={`${styles.content} container-fluid bg-primary`}>
+        <div className="d-flex flex-column">
+          <h3>Board</h3>
+          <div className="row">
+            <div className="col-auto">
+              <List title="To Do" cards={['todo1', 'todo2']} />
+            </div>
+            <div className="col-auto">
+              <List title="Pending" cards={['single card for 2nd title']} />
+            </div>
+            <div className="col-auto">
+              <List title="With no cards" />
+            </div>
+            <div className="col-auto">
+              <List title="Done" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer className="container text-light">
+        <div className="row justify-content-end text-center">
+          <h4>Footer</h4>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default Board;
