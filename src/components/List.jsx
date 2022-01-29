@@ -1,41 +1,48 @@
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { ADDCARD } from '../store/actions';
 import CardDisplay from './CardDisplay';
 import CardInput from './CardInput';
 import styles from './List.module.scss';
 
-const List = (props) => {
-  const [adding, setAdding] = useState(false);
-  const [cards, setCards] = useState(props.cards || []);
+const List = ({ board, title, cards: card }) => {
+  const cardsUS = useSelector((state) => state.modify.boards[board][title]);
+
+  const [isAdding, setIsAdding] = useState(false);
+  const [cards, setCards] = useState(card || []);
   const [newCard, setNewCard] = useState(null);
   const inputRef = useRef();
   const btnRef = useRef();
 
-  const handleInputCard = (e) => {
-    if ((e.type === 'keypress' && e.key === 'Enter') || e.type === 'click') {
-      setAdding(true);
+  useMemo(() => setCards(card), [card]);
+
+  const dispatch = useDispatch();
+
+  const handleAddCard = (e) => {
+    if (!e.key || e.key === 'Enter') {
+      setIsAdding(true);
     }
   };
 
   const handleSaveCard = (e) => {
-    if ((e.type === 'keypress' && e.key === 'Enter') || e.type === 'click') {
+    if (!e.key || e.key === 'Enter') {
       if (newCard) {
-        const prevCards = cards.slice();
+        dispatch(ADDCARD({ board, list: title, newCard }));
+        setNewCard({ newCard });
         inputRef.current.value = null;
-        if (newCard) prevCards.push(newCard);
-        setCards(prevCards);
       }
       e.preventDefault();
     }
   };
 
   const handleCancelCard = (e) => {
-    if (e.relatedTarget && e.relatedTarget.id === 'add-card') {
+    if (e.relatedTarget && e.relatedTarget.id === 'add-card-btn') {
       inputRef.current.focus();
       btnRef.current.click();
     } else {
-      setAdding(false);
+      setIsAdding(false);
     }
-    setAdding(false);
+    setIsAdding(false);
   };
 
   const handleChange = (e) => {
@@ -44,10 +51,13 @@ const List = (props) => {
 
   return (
     <div className={`${styles.list} card mb-4`}>
-      <h6 className="card-title mb-0 ms-3 mt-1">{props.title}</h6>
+      <h6 className="card-title mb-0 ms-3 mt-1">{title}</h6>
       <div className="card-body p-2">
         {cards && cards.map((desc) => <CardDisplay key={desc} description={desc} />)}
-        {adding && (
+        {/**
+         * for adding card show textarea
+         */}
+        {isAdding && (
           <CardInput
             id="card-input"
             ref={inputRef}
@@ -57,10 +67,14 @@ const List = (props) => {
           />
         )}
       </div>
-      {adding ? (
+      {/**
+       * for adding card show add and cancel button and
+       * for not adding card show add placeholder
+       */}
+      {isAdding ? (
         <div className="p-2">
           <button
-            id="add-card"
+            id="add-card-btn"
             ref={btnRef}
             type="button"
             className="btn btn-primary"
@@ -80,8 +94,8 @@ const List = (props) => {
           className={`${styles.list_footer} card-footer text-secondary p-2`}
           role="button"
           tabIndex={0}
-          onKeyPress={handleInputCard}
-          onClick={handleInputCard}
+          onKeyPress={handleAddCard}
+          onClick={handleAddCard}
         >
           {cards?.length ? '+ Add another card' : '+ Add a card'}
         </div>
