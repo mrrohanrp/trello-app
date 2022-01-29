@@ -31,6 +31,7 @@ const List = ({ board, title, cards: card }) => {
         setNewCard({ newCard });
         inputRef.current.value = null;
       }
+      // no new line after enter
       e.preventDefault();
     }
   };

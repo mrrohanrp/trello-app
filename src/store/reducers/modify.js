@@ -26,8 +26,8 @@ const addReducer = (state = initialState, action) => {
       });
     }
     case ADD_LIST: {
-      const { board, list } = action.payload;
-      const updatedBoard = Object.assign({}, state.boards[board], { [list]: [] });
+      const { board, newList } = action.payload;
+      const updatedBoard = Object.assign({}, state.boards[board], { [newList]: [] });
       return Object.assign({}, state, {
         boards: Object.assign({}, state.boards, { [board]: updatedBoard })
       });
