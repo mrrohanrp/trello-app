@@ -47,9 +47,6 @@ const Board = ({ board }) => {
 
   return (
     <div className={`${styles.board} d-flex flex-column bg-dark`}>
-      <div className="container text-center text-light">
-        <h2>Trello</h2>
-      </div>
       <div className={`${styles.content} container-fluid bg-primary`}>
         <div className="d-flex flex-column">
           <h3>{board} Board</h3>
@@ -118,11 +115,6 @@ const Board = ({ board }) => {
           </div>
         </div>
       </div>
-      <footer className="container text-light">
-        <div className="row justify-content-end text-center">
-          <h4>Footer</h4>
-        </div>
-      </footer>
     </div>
   );
 };

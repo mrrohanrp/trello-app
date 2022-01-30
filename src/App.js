@@ -1,12 +1,8 @@
 import React from 'react';
-import Board from './components/Board';
+import Router from './routes';
 
 function App() {
-  return (
-    <div className="app">
-      <Board board="temp" />
-    </div>
-  );
+  return <Router />;
 }
 
 export default App;
