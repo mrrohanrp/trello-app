@@ -15,7 +15,7 @@ export const MODIFYCARD = (payload) => ({ type: MODIFY_CARD, payload });
 export const REMOVECARD = (payload) => ({ type: REMOVE_CARD, payload });
 export const ADDLIST = (payload) => ({ type: ADD_LIST, payload });
 export const RENAMELIST = (payload) => ({ type: RENAME_LIST, payload });
-export const REOVELIST = (payload) => ({ type: REMOVE_LIST, payload });
+export const REMOVELIST = (payload) => ({ type: REMOVE_LIST, payload });
 export const ADDBOARD = (payload) => ({ type: ADD_BOARD, payload });
 export const RENAMEBOARD = (payload) => ({ type: RENAME_BOARD, payload });
 export const REMOVEBOARD = (payload) => ({ type: REMOVE_BOARD, payload });

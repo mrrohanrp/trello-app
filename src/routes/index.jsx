@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Layout from '../components/layouts/Layout';
-import Home from '../components/layouts/Home';
-import NotFound from '../components/layouts/NotFound';
+import Layout from '../pages/Layout';
+import Home from '../pages/Home';
+import Boards from '../pages/Boards';
+import NotFound from '../pages/NotFound';
 
 const index = () => {
   return (
@@ -11,6 +12,7 @@ const index = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="board/:boardName" element={<Boards />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

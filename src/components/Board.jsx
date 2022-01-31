@@ -10,8 +10,8 @@ const Board = ({ board }) => {
   const inputRef = useRef();
   const btnRef = useRef();
 
-  const listsUS = useSelector((state) => state.modify.boards[board]);
-  const listNames = Object.keys(listsUS);
+  const listsUS = useSelector((state) => state.modify.boards[board].lists);
+  const listNames = listsUS ? Object.keys(listsUS) : null;
 
   const dispatch = useDispatch();
 
@@ -46,17 +46,16 @@ const Board = ({ board }) => {
   };
 
   return (
-    <div className={`${styles.board} d-flex flex-column bg-dark`}>
-      <div className={`${styles.content} container-fluid bg-primary`}>
-        <div className="d-flex flex-column">
-          <h3>{board} Board</h3>
-
-          {/**
-           * for list
-           */}
-          <div className="row">
+    <>
+      {listsUS ? (
+        <div className="d-flex flex-column w-100 h-100 pb-4">
+          <h3>{board}</h3>
+          <div className="d-flex flex-row h-100 flex-wrap">
+            {/**
+             * for list
+             */}
             {listNames.map((listName) => (
-              <div className="col-auto" key={listName}>
+              <div className="col-auto ms-0 me-2 px-0" key={listName}>
                 <List board={board} title={listName} cards={listsUS[listName]} />
               </div>
             ))}
@@ -114,8 +113,18 @@ const Board = ({ board }) => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        /**
+         * show if board not found
+         */
+        <div className="row justify-content-center text-center">
+          <div className="d-flex flex-column">
+            <h1 className="text-danger fw-bold">Error</h1>
+            <h5>{`The requested board "${board}" does not exist...`}</h5>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
