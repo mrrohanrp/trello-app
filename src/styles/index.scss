@@ -1,4 +1,5 @@
 @import '~bootstrap/scss/bootstrap';
+@import './constants/colors';
 @import './constants/custom';
 
 body {
@@ -16,6 +17,13 @@ code {
 .content {
   flex: 1 0 auto;
   position: relative;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 /* body,

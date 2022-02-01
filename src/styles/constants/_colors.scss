@@ -1,0 +1,25 @@
+$color-map: (
+  'blue': #0079bf,
+  'orange': #d29034,
+  'green': #519839,
+  'red': #b04632,
+  'purple': #89609e,
+  'pink': #cd5a91
+);
+
+// background and text colors
+@each $name, $color in $color-map {
+  .bg-#{$name} {
+    background-color: $color;
+    border-color: $color;
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: rgba($color, 0.7);
+      border-color: rgba($color, 0.7);
+    }
+  }
+  .text-#{$name} {
+    color: $color;
+  }
+}

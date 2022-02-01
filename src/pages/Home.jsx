@@ -1,28 +1,36 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-
-const boardNames = ['temp', 'primary', 'default'];
+import BoardAdd from '../components/BoardAdd';
 
 const Home = () => {
+  const boardNamesUS = useSelector((state) => state.modify.boards);
+  const boardNames = Object.keys(boardNamesUS);
+  const boardColors = boardNames.map((name) => boardNamesUS[name].color);
+
   return (
     <div className="content container-fluid py-4">
-      <div className="row mx-lg-3 mx-0 board-display-container">
-        {boardNames.map((name) => (
-          <div className="col-lg-3 col-md-4 col-sm-6 my-2" key={name}>
-            <Link to={`board/${name}`}>
-              <div className="container h-100 px-0">
-                <div className="row mx-0">
-                  <button
-                    type="button"
-                    className="btn btn-block btn-primary mb-4 board-display p-5"
-                  >
-                    {name}
-                  </button>
-                </div>
-              </div>
-            </Link>
-          </div>
-        ))}
+      <div className="row mx-lg-3 mx-0">
+        {/**
+         * display multiple boards
+         */}
+        {boardNames &&
+          boardNames.map((name, index) => (
+            <div className="col-lg-3 col-md-4 col-sm-6 my-2" key={name}>
+              <Link
+                to={`board/${name}`}
+                role="button"
+                className={`btn btn-block mb-4 p-5 h-100 w-100 bg-${boardColors[index]}`}
+              >
+                <p className="fw-bolder h5 text-center h-100 text-white text-break">{name}</p>
+              </Link>
+            </div>
+          ))}
+
+        {/**
+         * modal to add board
+         */}
+        <BoardAdd />
       </div>
     </div>
   );
