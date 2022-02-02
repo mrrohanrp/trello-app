@@ -1,8 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import List from './List';
 import styles from './Board.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { ADDLIST } from '../store/actions';
+import { ADDLIST, ADDRECENT } from '../store/actions';
+
+const propTypes = {
+  /** Board Name for board */
+  board: PropTypes.string.isRequired
+};
 
 const Board = ({ board }) => {
   const [isAdding, setIsAdding] = useState(false);
@@ -15,6 +21,10 @@ const Board = ({ board }) => {
   const listNames = listsUS ? Object.keys(listsUS) : null;
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(ADDRECENT({ board }));
+  }, [board, dispatch]);
 
   const handleAddList = () => {
     setIsAdding(true);
@@ -128,5 +138,7 @@ const Board = ({ board }) => {
     </>
   );
 };
+
+Board.propTypes = propTypes;
 
 export default Board;

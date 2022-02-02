@@ -1,4 +1,4 @@
-import { ADD_LIST, ADD_CARD, ADD_BOARD, UPDATE_COLOR } from '../actionTypes';
+import { ADD_LIST, ADD_CARD, ADD_BOARD, UPDATE_COLOR, ADD_RECENT } from '../actionTypes';
 
 const initialState = {
   boards: {
@@ -44,7 +44,8 @@ const initialState = {
       lists: {}
     }
   },
-  color: 'blue'
+  color: 'blue',
+  recent: []
 };
 
 const addReducer = (state = initialState, action) => {
@@ -79,6 +80,15 @@ const addReducer = (state = initialState, action) => {
     }
     case UPDATE_COLOR: {
       return Object.assign({}, state, { color: action.payload.color });
+    }
+    case ADD_RECENT: {
+      const { board } = action.payload;
+      let newRecent = state.recent.slice();
+      if (newRecent.includes(board))
+        newRecent = newRecent.filter((boardName) => boardName !== board);
+      newRecent.unshift(board);
+      if (newRecent.length > 4) newRecent.pop();
+      return Object.assign({}, state, { recent: newRecent });
     }
     default:
       return state;

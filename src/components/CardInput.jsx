@@ -1,6 +1,16 @@
 import React, { forwardRef } from 'react';
+import PropTypes from 'prop-types';
 
-export const CardInput = forwardRef((props, ref) => {
+const propTypes = {
+  /** onChange handler for Card Input */
+  onChange: PropTypes.func,
+  /** onKeyPress handler for Card Input */
+  onKeyPress: PropTypes.func,
+  /** onBlur handler for Card Input */
+  onBlur: PropTypes.func
+};
+
+const CardInput = forwardRef((props, ref) => {
   return (
     <textarea
       ref={ref}
@@ -11,4 +21,7 @@ export const CardInput = forwardRef((props, ref) => {
     />
   );
 });
+
+CardInput.propTypes = propTypes;
+
 export default CardInput;

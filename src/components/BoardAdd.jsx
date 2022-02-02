@@ -17,9 +17,9 @@ const BoardAdd = () => {
 
   const handleModalClose = () => {
     setBoard('');
-    setColor('blue');
     setModalShow(false);
   };
+
   const handleModalShow = () => {
     setModalShow(true);
     setTimeout(() => {
@@ -35,7 +35,6 @@ const BoardAdd = () => {
     if (!e.key || e.key === 'Enter') {
       dispatch(ADDBOARD({ board, color }));
       setBoard('');
-      setColor('blue');
       handleModalClose();
     }
   };
@@ -46,13 +45,13 @@ const BoardAdd = () => {
 
   return (
     <>
-      <div className="col-lg-3 col-md-4 col-sm-6 my-2">
+      <div className="col-lg-2 col-md-3 col-sm-4 my-2">
         <Button
           variant="outline-primary"
           onClick={handleModalShow}
-          className="btn btn-block mb-4 p-5 w-100 h-100"
+          className="btn btn-block text-start h-100 w-100"
         >
-          <p className="fw-bolder h5 text-center h-100">Create a new board</p>
+          <p className="fw-bolder h5 h-100">Create new board</p>
         </Button>
       </div>
 
@@ -73,7 +72,7 @@ const BoardAdd = () => {
                 {colors.map((color) => (
                   <li className={`${styles.color_picker} me-2`} key={color}>
                     <Button
-                      className={`btn bg-${color} h-100 w-100`}
+                      className={`btn bg-${color} bg-${color}-hover h-100 w-100`}
                       type="button"
                       id={`option-${color}`}
                       title={color}
@@ -124,8 +123,8 @@ const BoardAdd = () => {
           <Button
             variant="secondary"
             onClick={handleClickAdd}
-            disabled={!board}
-            className={`bg-${color}`}
+            disabled={!board || !color}
+            className={`bg-${color} bg-${color}-hover`}
           >
             Create Board
           </Button>

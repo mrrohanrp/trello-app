@@ -1,13 +1,21 @@
 import React, { useMemo, useRef, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { ADDCARD } from '../store/actions';
 import CardDisplay from './CardDisplay';
 import CardInput from './CardInput';
 import styles from './List.module.scss';
 
-const List = ({ board, title, cards: card }) => {
-  const cardsUS = useSelector((state) => state.modify.boards[board][title]);
+const propTypes = {
+  /** Board Name  */
+  board: PropTypes.string.isRequired,
+  /** List Title  */
+  title: PropTypes.string.isRequired,
+  /** List Cards  */
+  cards: PropTypes.arrayOf(PropTypes.string).isRequired
+};
 
+const List = ({ board, title, cards: card }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [cards, setCards] = useState(card || []);
   const [newCard, setNewCard] = useState(null);
@@ -92,7 +100,7 @@ const List = ({ board, title, cards: card }) => {
         </div>
       ) : (
         <div
-          className={`${styles.list_footer} card-footer text-secondary p-2`}
+          className={`${styles.list_footer} card-footer text-secondary p-2 border-top-0`}
           role="button"
           tabIndex={0}
           onKeyPress={handleAddCard}
@@ -104,5 +112,7 @@ const List = ({ board, title, cards: card }) => {
     </div>
   );
 };
+
+List.propTypes = propTypes;
 
 export default List;
