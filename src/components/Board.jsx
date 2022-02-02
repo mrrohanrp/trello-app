@@ -11,6 +11,7 @@ const Board = ({ board }) => {
   const btnRef = useRef();
 
   const listsUS = useSelector((state) => state.modify.boards[board].lists);
+  const colorUS = useSelector((state) => state.modify.color);
   const listNames = listsUS ? Object.keys(listsUS) : null;
 
   const dispatch = useDispatch();
@@ -104,7 +105,7 @@ const Board = ({ board }) => {
               ) : (
                 <button
                   type="button"
-                  className={`${styles.board_list_add} btn btn-dark text-left`}
+                  className={`${styles.board_list_add} btn text-start text-white bg-light-${colorUS} bg-${colorUS}-hover`}
                   onClick={handleAddList}
                 >
                   {listNames?.length ? '+ Add another list' : '+ Add a list'}

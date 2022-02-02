@@ -1,4 +1,4 @@
-import { ADD_LIST, ADD_CARD, ADD_BOARD } from '../actionTypes';
+import { ADD_LIST, ADD_CARD, ADD_BOARD, UPDATE_COLOR } from '../actionTypes';
 
 const initialState = {
   boards: {
@@ -10,8 +10,41 @@ const initialState = {
         'With no cards': [],
         Done: []
       }
+    },
+    Orange: {
+      color: 'orange',
+      lists: {}
+    },
+    Green: {
+      color: 'green',
+      lists: {}
+    },
+    Red: {
+      color: 'red',
+      lists: {}
+    },
+    Purple: {
+      color: 'purple',
+      lists: {}
+    },
+    Pink: {
+      color: 'pink',
+      lists: {}
+    },
+    Mint: {
+      color: 'mint',
+      lists: {}
+    },
+    Sky: {
+      color: 'sky',
+      lists: {}
+    },
+    Gray: {
+      color: 'gray',
+      lists: {}
     }
-  }
+  },
+  color: 'blue'
 };
 
 const addReducer = (state = initialState, action) => {
@@ -43,6 +76,9 @@ const addReducer = (state = initialState, action) => {
       const { board, color } = action.payload;
       const newBoard = { [board]: { color, lists: {} } };
       return Object.assign({}, state, { boards: Object.assign({}, state.boards, newBoard) });
+    }
+    case UPDATE_COLOR: {
+      return Object.assign({}, state, { color: action.payload.color });
     }
     default:
       return state;

@@ -4,7 +4,7 @@ import { ADDBOARD } from '../store/actions';
 import { Modal, Button } from 'react-bootstrap';
 import styles from './BoardAdd.module.scss';
 
-const colors = ['blue', 'orange', 'green', 'red', 'purple', 'pink'];
+const colors = ['blue', 'orange', 'green', 'red', 'purple', 'pink', 'mint', 'sky', 'gray'];
 
 const BoardAdd = () => {
   const [board, setBoard] = useState('');

@@ -7,7 +7,8 @@ import {
   REMOVE_LIST,
   ADD_BOARD,
   RENAME_BOARD,
-  REMOVE_BOARD
+  REMOVE_BOARD,
+  UPDATE_COLOR
 } from './actionTypes.js';
 
 export const ADDCARD = (payload) => ({ type: ADD_CARD, payload });
@@ -19,3 +20,4 @@ export const REMOVELIST = (payload) => ({ type: REMOVE_LIST, payload });
 export const ADDBOARD = (payload) => ({ type: ADD_BOARD, payload });
 export const RENAMEBOARD = (payload) => ({ type: RENAME_BOARD, payload });
 export const REMOVEBOARD = (payload) => ({ type: REMOVE_BOARD, payload });
+export const UPDATECOLOR = (payload) => ({ type: UPDATE_COLOR, payload });

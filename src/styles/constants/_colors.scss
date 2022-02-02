@@ -1,25 +1,80 @@
+@use 'sass:map';
+/**
+  * Colors and Shades
+  */
 $color-map: (
-  'blue': #0079bf,
-  'orange': #d29034,
-  'green': #519839,
-  'red': #b04632,
-  'purple': #89609e,
-  'pink': #cd5a91
+  'blue': (
+    'light': #3d99ce,
+    'normal': #0079bf,
+    'dark': #004269
+  ),
+  'orange': (
+    'light': #ddab65,
+    'normal': #d29034,
+    'dark': #734f1d
+  ),
+  'green': (
+    'light': #7bb168,
+    'normal': #519839,
+    'dark': #2c531f
+  ),
+  'red': (
+    'light': #c37263,
+    'normal': #b04632,
+    'dark': #61261b
+  ),
+  'purple': (
+    'light': #a586b5,
+    'normal': #89609e,
+    'dark': #4b3557
+  ),
+  'pink': (
+    'light': #d981ab,
+    'normal': #cd5a91,
+    'dark': #713150
+  ),
+  'mint': (
+    'light': #76ce8e,
+    'normal': #4bbf6b,
+    'dark': #29693b
+  ),
+  'sky': (
+    'light': #3dc1d8,
+    'normal': #00aecc,
+    'dark': #006070
+  ),
+  'gray': (
+    'light': #a1a8ab,
+    'normal': #838c91,
+    'dark': #484d50
+  )
 );
 
-// background and text colors
+/** 
+  * background and text colors
+  */
 @each $name, $color in $color-map {
-  .bg-#{$name} {
-    background-color: $color;
-    border-color: $color;
-    &:hover,
-    &:active,
-    &:focus {
-      background-color: rgba($color, 0.7);
-      border-color: rgba($color, 0.7);
-    }
+  $light: map-get($color, light);
+  $normal: map-get($color, normal);
+  $dark: map-get($color, dark);
+  .bg-light-#{$name} {
+    background-color: $light;
+    border-color: $light;
   }
+  .bg-#{$name},
+  .bg-light-#{$name}-hover:hover,
+  .bg-light-#{$name}-hover:focus {
+    background-color: $normal;
+    border-color: $normal;
+  }
+  .bg-dark-#{$name},
+  .bg-#{$name}-hover:hover,
+  .bg-#{$name}-hover:focus {
+    background-color: $dark;
+    border-color: $dark;
+  }
+
   .text-#{$name} {
-    color: $color;
+    color: $normal;
   }
 }

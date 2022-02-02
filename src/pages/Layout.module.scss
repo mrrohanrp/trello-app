@@ -1,0 +1,14 @@
+.logo {
+  width: 5rem;
+  height: 1rem;
+  padding: 1rem 0;
+  background-image: url('../assets/header_static.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  &:hover,
+  &:focus {
+    background-image: url('../assets/header_dynamic.gif');
+  }
+}

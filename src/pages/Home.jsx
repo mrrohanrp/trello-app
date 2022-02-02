@@ -1,12 +1,15 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import BoardAdd from '../components/BoardAdd';
+import { UPDATECOLOR } from '../store/actions';
 
 const Home = () => {
   const boardNamesUS = useSelector((state) => state.modify.boards);
   const boardNames = Object.keys(boardNamesUS);
   const boardColors = boardNames.map((name) => boardNamesUS[name].color);
+
+  const dispatch = useDispatch();
 
   return (
     <div className="content container-fluid py-4">
@@ -20,7 +23,8 @@ const Home = () => {
               <Link
                 to={`board/${name}`}
                 role="button"
-                className={`btn btn-block mb-4 p-5 h-100 w-100 bg-${boardColors[index]}`}
+                className={`btn btn-block mb-4 p-5 h-100 w-100 bg-${boardColors[index]} bg-${boardColors[index]}-hover`}
+                onClick={() => dispatch(UPDATECOLOR({ color: boardColors[index] }))}
               >
                 <p className="fw-bolder h5 text-center h-100 text-white text-break">{name}</p>
               </Link>
