@@ -4,6 +4,7 @@ import List from './List';
 import styles from './Board.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { ADDLIST, ADDRECENT } from '../store/actions';
+import { Button } from 'react-bootstrap';
 
 const propTypes = {
   /** Board Name for board */
@@ -94,18 +95,17 @@ const Board = ({ board }) => {
                     />
 
                     <div className="pt-2">
-                      <button
+                      <Button
                         id="add-list-btn"
                         ref={btnRef}
-                        type="button"
-                        className="btn btn-primary"
+                        variant="primary"
                         onClick={handleSaveList}
                       >
                         Add List
-                      </button>
-                      <button
-                        type="button"
-                        className="btn-close btn mx-2"
+                      </Button>
+                      <Button
+                        variant="close"
+                        className="mx-2"
                         aria-label="close"
                         onClick={handleCancelList}
                       />
@@ -113,13 +113,12 @@ const Board = ({ board }) => {
                   </div>
                 </div>
               ) : (
-                <button
-                  type="button"
-                  className={`${styles.board_list_add} btn text-start text-white bg-light-${colorUS} bg-${colorUS}-hover`}
+                <Button
+                  className={`${styles.board_list_add} text-start text-white bg-light-${colorUS} bg-${colorUS}-hover`}
                   onClick={handleAddList}
                 >
                   {listNames?.length ? '+ Add another list' : '+ Add a list'}
-                </button>
+                </Button>
               )}
             </div>
           </div>

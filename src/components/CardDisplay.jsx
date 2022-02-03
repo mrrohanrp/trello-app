@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './CardDisplay.module.scss';
+import { Button } from 'react-bootstrap';
 
 const propTypes = {
   /** Description for Card List */
@@ -15,9 +16,9 @@ const CardDisplay = ({ description, onClick }) => {
       <div className="row mx-0">
         <div className="col-11 px-0 mb-0">{description}</div>
         <div className="col-1 px-0">
-          <button type="button" className="btn p-1 card-edit-button" onClick={onClick}>
+          <Button variant="light" className="p-1 card-edit-button" onClick={onClick}>
             🖋
-          </button>
+          </Button>
         </div>
       </div>
     </div>

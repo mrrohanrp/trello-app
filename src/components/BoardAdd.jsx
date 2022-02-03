@@ -73,7 +73,6 @@ const BoardAdd = () => {
                   <li className={`${styles.color_picker} me-2`} key={color}>
                     <Button
                       className={`btn bg-${color} bg-${color}-hover h-100 w-100`}
-                      type="button"
                       id={`option-${color}`}
                       title={color}
                       value={color}
