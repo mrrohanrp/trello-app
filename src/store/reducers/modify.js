@@ -1,4 +1,11 @@
-import { ADD_LIST, ADD_CARD, ADD_BOARD, UPDATE_COLOR, ADD_RECENT } from '../actionTypes';
+import {
+  ADD_LIST,
+  ADD_CARD,
+  ADD_BOARD,
+  UPDATE_COLOR,
+  ADD_RECENT,
+  MODIFY_CARD
+} from '../actionTypes';
 
 const initialState = {
   boards: {
@@ -50,10 +57,25 @@ const initialState = {
 
 const addReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_CARD: {
+    /* case ADD_CARD: {
       const { board, list, newCard } = action.payload;
       const updatedList = [...state.boards[board].lists[list]];
       updatedList.push(newCard);
+      return Object.assign({}, state, {
+        boards: Object.assign({}, state.boards, {
+          [board]: Object.assign({}, state.boards[board], {
+            lists: Object.assign({}, state.boards[board].lists, {
+              [list]: updatedList
+            })
+          })
+        })
+      });
+    } */
+    case MODIFY_CARD: {
+      const { board, list, card, index } = action.payload;
+      let updatedList = [...state.boards[board].lists[list]];
+      if (index !== undefined) updatedList = updatedList.map((c, i) => (i === index ? card : c));
+      else updatedList.push(card);
       return Object.assign({}, state, {
         boards: Object.assign({}, state.boards, {
           [board]: Object.assign({}, state.boards[board], {
