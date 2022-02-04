@@ -1,7 +1,7 @@
 import React, { useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { CREATECARD, UPDATECARD } from '../store/actions';
+import { CREATECARD, DELETECARD, UPDATECARD } from '../store/actions';
 import CardDisplay from './CardDisplay';
 import CardInput from './CardInput';
 import styles from './List.module.scss';
@@ -10,17 +10,18 @@ import { getNewId } from '../utils/utils';
 
 const propTypes = {
   /** List ID for the List  */
-  listId: PropTypes.string.isRequired
+  listId: PropTypes.string.isRequired,
+  /** Delete list function for the List  */
+  onDelete: PropTypes.func.isRequired
 };
 
-const List = ({ listId }) => {
+const List = ({ listId, onDelete }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [cards, setCards] = useState([]);
   const [cardText, setCardText] = useState(null);
   const [editId, setEditId] = useState(null);
 
   const inputRef = useRef();
-  const btnRef = useRef();
 
   const name = useSelector((state) => state.lists[listId].name);
   const cardsUS = useSelector((state) => state.lists[listId].cards);
@@ -42,22 +43,23 @@ const List = ({ listId }) => {
         dispatch(CREATECARD({ cardId, listId, description: cardText }));
         setCardText({ cardText });
         inputRef.current.value = null;
+        setIsAdding(false);
       }
-      // no new line after enter
-      e.preventDefault();
     }
   };
 
   const handleCancelCard = (e) => {
-    if (e.relatedTarget && e.relatedTarget.id === 'add-card-btn') {
-      inputRef.current.focus();
-      btnRef.current.click();
-    } else {
+    if (!e.relatedTarget || !['add-card-btn', 'delete-card-btn'].includes(e.relatedTarget.id)) {
       setIsAdding(false);
       setCardText(null);
       setEditId(null);
     }
-    /*  setIsAdding(false); */
+  };
+
+  const handleDeleteCard = () => {
+    dispatch(DELETECARD({ listId, cardId: editId }));
+    setEditId(null);
+    setCardText(null);
   };
 
   const handleChange = (e) => {
@@ -76,17 +78,23 @@ const List = ({ listId }) => {
         setCardText(null);
         setEditId(null);
       }
-      e.preventDefault();
     }
   };
 
   return (
     <div className={`${styles.list} card mb-4`}>
-      <h6 className="card-title mb-0 ms-3 mt-2">{name}</h6>
+      <div className="card-title container px-0">
+        <div className="d-flex mx-0">
+          <span className="card-title mb-0 ms-3 mt-2 h6">{name}</span>
+          <button onClick={() => onDelete(listId, cards)} className="btn px-2 ms-auto ">
+            🗑
+          </button>
+        </div>
+      </div>
       {/**
        * multiple editable cards in the list
        */}
-      <div className="card-body px-2 py-0 mt-2">
+      <div className="card-body px-2 py-0">
         {cards &&
           cards.map((cardId) => {
             if (cardId === editId) {
@@ -112,14 +120,13 @@ const List = ({ listId }) => {
                     <div className="col-auto p-0">
                       <Button
                         variant="success"
-                        ref={btnRef}
                         id="add-card-btn"
                         className="me-2"
                         onClick={handleSaveEdit}
                       >
                         Save
                       </Button>
-                      <Button variant="danger" id="delete-card-btn" onClick={handleCancelCard}>
+                      <Button variant="danger" id="delete-card-btn" onClick={handleDeleteCard}>
                         Delete
                       </Button>
                     </div>
@@ -156,7 +163,7 @@ const List = ({ listId }) => {
        */}
       {isAdding ? (
         <div className="p-2">
-          <Button id="add-card-btn" ref={btnRef} variant="primary" onClick={handleSaveCard}>
+          <Button id="add-card-btn" variant="primary" onClick={handleSaveCard}>
             Add Card
           </Button>
           <Button variant="close" className="mx-2" aria-label="close" onClick={handleCancelCard} />

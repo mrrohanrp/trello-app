@@ -1,4 +1,4 @@
-import { CREATE_BOARD, UPDATE_BOARD, DELETE_BOARD, CREATE_LIST } from '../actionTypes';
+import { CREATE_BOARD, UPDATE_BOARD, DELETE_BOARD, CREATE_LIST, DELETE_LIST } from '../actionTypes';
 import { deleteFromObj, updateObj } from '../../utils/utils';
 
 const initialState = {
@@ -11,7 +11,7 @@ const initialState = {
   bid2: {
     name: 'Board Orange',
     color: 'orange',
-    lists: ['lid1', 'lid4', 'lid5'],
+    lists: ['lid4', 'lid5'],
     starred: false
   },
   bid3: {
@@ -58,6 +58,13 @@ function createList(state, action) {
   return updateObj(state, { [boardId]: updatedBoard });
 }
 
+function deleteList(state, action) {
+  const { boardId, listId } = action.payload;
+  const newLists = state[boardId].lists.slice().filter((id) => id !== listId);
+  const updatedBoard = updateObj(state[boardId], { lists: newLists });
+  return updateObj(state, { [boardId]: updatedBoard });
+}
+
 const boardsReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_BOARD:
@@ -68,6 +75,8 @@ const boardsReducer = (state = initialState, action) => {
       return deleteFromObj(state, action.payload.boardId);
     case CREATE_LIST:
       return createList(state, action);
+    case DELETE_LIST:
+      return deleteList(state, action);
     default:
       return state;
   }

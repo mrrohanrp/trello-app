@@ -1,4 +1,4 @@
-import { CREATE_CARD, UPDATE_CARD, DELETE_CARD } from '../actionTypes';
+import { CREATE_CARD, UPDATE_CARD, DELETE_CARD, DELETE_LIST } from '../actionTypes';
 import { deleteFromObj, updateObj } from '../../utils/utils';
 
 const initialState = {
@@ -15,19 +15,19 @@ const initialState = {
     checked: false
   },
   cid4: {
-    description: 'Pending 1',
+    description: 'Lorem ipsum',
     checked: false
   },
   cid5: {
-    description: 'Pending 2',
+    description: 'Lorem ipsum dolor sit. ',
     checked: false
   },
   cid6: {
-    description: 'Done 1',
+    description: 'amet consectetur adipisicin',
     checked: false
   },
   cid7: {
-    description: 'Designate 1',
+    description: 'adipisicing elit. Beatae.',
     checked: false
   }
 };
@@ -44,6 +44,14 @@ function updateCard(state, action) {
   return updateObj(state, { [cardId]: updatedCard });
 }
 
+function deleteList(state, action) {
+  const { cardIds } = action.payload;
+  const newState = Object.keys(state)
+    .filter((id) => !cardIds.includes(id))
+    .reduce((obj, id) => updateObj(obj, { [id]: state[id] }), {});
+  return newState;
+}
+
 const cardsReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_CARD:
@@ -52,6 +60,8 @@ const cardsReducer = (state = initialState, action) => {
       return updateCard(state, action);
     case DELETE_CARD:
       return deleteFromObj(state, action.payload.cardId);
+    case DELETE_LIST:
+      return deleteList(state, action);
     default:
       return state;
   }

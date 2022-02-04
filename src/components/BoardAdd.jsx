@@ -103,6 +103,7 @@ const BoardAdd = () => {
                   onChange={handleChange}
                   value={name}
                   maxLength={50}
+                  onKeyPress={(name && handleClickAdd) || null}
                 />
               </label>
               {!name && (

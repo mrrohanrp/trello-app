@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import List from './List';
 import styles from './Board.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { CREATELIST, ADDRECENT } from '../store/actions';
+import { CREATELIST, ADDRECENT, DELETELIST } from '../store/actions';
 import { Button } from 'react-bootstrap';
 import { getNewId } from '../utils/utils';
 
@@ -16,7 +16,6 @@ const Board = ({ boardId }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [listName, setListName] = useState(null);
   const inputRef = useRef();
-  const btnRef = useRef();
 
   const lists = useSelector((state) => state.boards[boardId].lists);
   const name = useSelector((state) => state.boards[boardId].name);
@@ -45,8 +44,6 @@ const Board = ({ boardId }) => {
         inputRef.current.value = null;
         setIsAdding(false);
       }
-      // no new line after enter
-      e.preventDefault();
     }
   };
 
@@ -57,6 +54,10 @@ const Board = ({ boardId }) => {
       setIsAdding(false);
       setListName(null);
     }
+  };
+
+  const handleDeleteList = (listId, cards) => {
+    dispatch(DELETELIST({ listId, boardId, cardIds: cards }));
   };
 
   return (
@@ -70,7 +71,7 @@ const Board = ({ boardId }) => {
              */}
             {lists.map((listId) => (
               <div className="col-auto ms-0 me-2 px-0" key={listId}>
-                {<List listId={listId} />}
+                {<List listId={listId} onDelete={handleDeleteList} />}
               </div>
             ))}
 
@@ -97,12 +98,7 @@ const Board = ({ boardId }) => {
                     />
 
                     <div className="pt-2">
-                      <Button
-                        id="add-list-btn"
-                        ref={btnRef}
-                        variant="primary"
-                        onClick={handleSaveList}
-                      >
+                      <Button id="add-list-btn" variant="primary" onClick={handleSaveList}>
                         Add List
                       </Button>
                       <Button
