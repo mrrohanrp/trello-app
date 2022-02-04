@@ -7,25 +7,22 @@ import BoardsSection from '../components/BoardsSection';
 import { UPDATECOLOR } from '../store/actions';
 
 const propTypes = {
-  /** Board Name to display board */
-  name: PropTypes.string.isRequired,
-  /** Board Name to display board */
-  index: PropTypes.number.isRequired
+  /** Board ID to display board */
+  boardId: PropTypes.string.isRequired
 };
 
-export const BoardDisplay = ({ name, index }) => {
-  const boardNamesUS = useSelector((state) => state.modify.boards);
-  const boardNames = Object.keys(boardNamesUS);
-  const boardColors = boardNames.map((name) => boardNamesUS[name].color);
+export const BoardDisplay = ({ boardId }) => {
+  const name = useSelector((state) => state.boards[boardId].name);
+  const color = useSelector((state) => state.boards[boardId].color);
 
   const dispatch = useDispatch();
   return (
     <div className="col-lg-2 col-md-3 col-sm-4 my-2">
       <Link
-        to={`board/${name}`}
+        to={`board/${boardId}/${name}`}
         role="button"
-        className={`btn btn-block text-start h-100 w-100 bg-${boardColors[index]} bg-${boardColors[index]}-hover`}
-        onClick={() => dispatch(UPDATECOLOR({ color: boardColors[index] }))}
+        className={`btn btn-block text-start h-100 w-100 bg-${color} bg-${color}-hover`}
+        onClick={() => dispatch(UPDATECOLOR({ color }))}
       >
         <p className="fw-bolder h5 h-100 text-white text-break">{name}</p>
       </Link>
@@ -34,10 +31,10 @@ export const BoardDisplay = ({ name, index }) => {
 };
 
 const Home = () => {
-  const boardNamesUS = useSelector((state) => state.modify.boards);
-  const boardNames = Object.keys(boardNamesUS);
+  const boardsUS = useSelector((state) => state.boards);
+  const boards = Object.keys(boardsUS);
 
-  const recentBoardNamesUS = useSelector((state) => state.modify.recent);
+  const recent = useSelector((state) => state.ui.recent);
 
   return (
     <div className="content container-fluid py-4">
@@ -48,14 +45,14 @@ const Home = () => {
       {/* <BoardsSection title="Starred Boards" icon="star" /> */}
 
       <BoardsSection title="Recently Viewed" icon="recent">
-        {recentBoardNamesUS?.map((name, index) => (
-          <BoardDisplay name={name} index={index} key={name} />
+        {recent?.map((boardId) => (
+          <BoardDisplay key={boardId} boardId={boardId} />
         ))}
       </BoardsSection>
 
       <BoardsSection title="Your Workspace" icon="workspace">
-        {boardNames?.map((name, index) => (
-          <BoardDisplay name={name} index={index} key={name} />
+        {boards?.map((boardId) => (
+          <BoardDisplay key={boardId} boardId={boardId} />
         ))}
         <BoardAdd />
       </BoardsSection>

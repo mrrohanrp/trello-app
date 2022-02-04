@@ -1,13 +1,14 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { ADDBOARD } from '../store/actions';
+import { CREATEBOARD } from '../store/actions';
 import { Modal, Button } from 'react-bootstrap';
 import styles from './BoardAdd.module.scss';
+import { getNewId } from '../utils/utils';
 
 const colors = ['blue', 'orange', 'green', 'red', 'purple', 'pink', 'mint', 'sky', 'gray'];
 
 const BoardAdd = () => {
-  const [board, setBoard] = useState('');
+  const [name, setName] = useState('');
   const [color, setColor] = useState('blue');
   const [modalShow, setModalShow] = useState(false);
 
@@ -16,7 +17,7 @@ const BoardAdd = () => {
   const dispatch = useDispatch();
 
   const handleModalClose = () => {
-    setBoard('');
+    setName('');
     setModalShow(false);
   };
 
@@ -33,14 +34,15 @@ const BoardAdd = () => {
 
   const handleClickAdd = (e) => {
     if (!e.key || e.key === 'Enter') {
-      dispatch(ADDBOARD({ board, color }));
-      setBoard('');
+      const boardId = 'b' + getNewId();
+      dispatch(CREATEBOARD({ boardId, name, color }));
+      setName('');
       handleModalClose();
     }
   };
 
   const handleChange = (e) => {
-    setBoard(e.target.value);
+    setName(e.target.value);
   };
 
   return (
@@ -99,11 +101,11 @@ const BoardAdd = () => {
                   autoCorrect="off"
                   spellCheck="false"
                   onChange={handleChange}
-                  value={board}
+                  value={name}
                   maxLength={50}
                 />
               </label>
-              {!board && (
+              {!name && (
                 <div className="d-flex flex-row">
                   <span role="img" aria-label="wave" className="me-2">
                     👋
@@ -122,7 +124,7 @@ const BoardAdd = () => {
           <Button
             variant="secondary"
             onClick={handleClickAdd}
-            disabled={!board || !color}
+            disabled={!name || !color}
             className={`bg-${color} bg-${color}-hover`}
           >
             Create Board

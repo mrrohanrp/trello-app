@@ -3,43 +3,45 @@ import PropTypes from 'prop-types';
 import List from './List';
 import styles from './Board.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { ADDLIST, ADDRECENT } from '../store/actions';
+import { CREATELIST, ADDRECENT } from '../store/actions';
 import { Button } from 'react-bootstrap';
+import { getNewId } from '../utils/utils';
 
 const propTypes = {
-  /** Board Name for board */
-  board: PropTypes.string.isRequired
+  /** Board ID for board */
+  boardId: PropTypes.string.isRequired
 };
 
-const Board = ({ board }) => {
+const Board = ({ boardId }) => {
   const [isAdding, setIsAdding] = useState(false);
-  const [newList, setNewList] = useState(null);
+  const [listName, setListName] = useState(null);
   const inputRef = useRef();
   const btnRef = useRef();
 
-  const listsUS = useSelector((state) => state.modify.boards[board].lists);
-  const colorUS = useSelector((state) => state.modify.color);
-  const listNames = listsUS ? Object.keys(listsUS) : null;
+  const lists = useSelector((state) => state.boards[boardId].lists);
+  const name = useSelector((state) => state.boards[boardId].name);
+  const color = useSelector((state) => state.ui.color);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(ADDRECENT({ board }));
-  }, [board, dispatch]);
+    dispatch(ADDRECENT({ boardId }));
+  }, [boardId, dispatch]);
 
   const handleAddList = () => {
     setIsAdding(true);
   };
 
   const handleChange = (e) => {
-    setNewList(e.target.value);
+    setListName(e.target.value);
   };
 
   const handleSaveList = (e) => {
     if (!e.key || e.key === 'Enter') {
-      if (newList) {
-        dispatch(ADDLIST({ board, newList }));
-        setNewList(null);
+      if (listName) {
+        const listId = 'l' + getNewId();
+        dispatch(CREATELIST({ boardId, listId, name: listName }));
+        setListName(null);
         inputRef.current.value = null;
         setIsAdding(false);
       }
@@ -53,22 +55,22 @@ const Board = ({ board }) => {
       inputRef.current.focus();
     } else {
       setIsAdding(false);
-      setNewList(null);
+      setListName(null);
     }
   };
 
   return (
     <>
-      {listsUS ? (
+      {lists ? (
         <div className="d-flex flex-column w-100 h-100 pb-4">
-          <h3>{board}</h3>
+          <h3>{name}</h3>
           <div className="d-flex flex-row h-100 flex-wrap">
             {/**
              * for list
              */}
-            {listNames.map((listName) => (
-              <div className="col-auto ms-0 me-2 px-0" key={listName}>
-                <List board={board} title={listName} cards={listsUS[listName]} />
+            {lists.map((listId) => (
+              <div className="col-auto ms-0 me-2 px-0" key={listId}>
+                {<List listId={listId} />}
               </div>
             ))}
 
@@ -114,10 +116,10 @@ const Board = ({ board }) => {
                 </div>
               ) : (
                 <Button
-                  className={`${styles.board_list_add} text-start text-white bg-light-${colorUS} bg-${colorUS}-hover`}
+                  className={`${styles.board_list_add} text-start text-white bg-light-${color} bg-${color}-hover`}
                   onClick={handleAddList}
                 >
-                  {listNames?.length ? '+ Add another list' : '+ Add a list'}
+                  {lists?.length ? '+ Add another list' : '+ Add a list'}
                 </Button>
               )}
             </div>
@@ -130,7 +132,7 @@ const Board = ({ board }) => {
         <div className="row justify-content-center text-center">
           <div className="d-flex flex-column">
             <h1 className="text-danger fw-bold">Error</h1>
-            <h5>{`The requested board "${board}" does not exist...`}</h5>
+            <h5>{`The requested board "${name}" does not exist...`}</h5>
           </div>
         </div>
       )}

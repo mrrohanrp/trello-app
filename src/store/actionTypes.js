@@ -1,11 +1,26 @@
-export const ADD_CARD = 'ADD_CARD';
-export const MODIFY_CARD = 'MODIFY_CARD';
-export const REMOVE_CARD = 'REMOVE_CARD';
-export const ADD_LIST = 'ADD_LIST';
-export const RENAME_LIST = 'RENAME_LIST';
-export const REMOVE_LIST = 'REMOVE_LIST';
-export const ADD_BOARD = 'ADD_BOARD';
-export const RENAME_BOARD = 'RENAME_BOARD';
-export const REMOVE_BOARD = 'DELETE_BOARD';
+/**
+ * Board ActionTypes
+ */
+export const CREATE_BOARD = 'CREATE_BOARD';
+export const UPDATE_BOARD = 'UPDATE_BOARD';
+export const DELETE_BOARD = 'DELETE_BOARD';
+
+/**
+ * List ActionTypes
+ */
+export const CREATE_LIST = 'CREATE_LIST';
+export const UPDATE_LIST = 'UPDATE_LIST';
+export const DELETE_LIST = 'DELETE_LIST';
+
+/**
+ * Card ActionTypes
+ */
+export const CREATE_CARD = 'CREATE_CARD';
+export const UPDATE_CARD = 'UPDATE_CARD';
+export const DELETE_CARD = 'DELETE_CARD';
+
+/**
+ * UI ActionTypes
+ */
 export const UPDATE_COLOR = 'UPDATE_COLOR';
 export const ADD_RECENT = 'ADD_RECENT';

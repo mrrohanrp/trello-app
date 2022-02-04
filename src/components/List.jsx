@@ -1,31 +1,31 @@
 import React, { useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { ADDCARD, MODIFYCARD } from '../store/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { CREATECARD, UPDATECARD } from '../store/actions';
 import CardDisplay from './CardDisplay';
 import CardInput from './CardInput';
 import styles from './List.module.scss';
 import { Button } from 'react-bootstrap';
+import { getNewId } from '../utils/utils';
 
 const propTypes = {
-  /** Board Name  */
-  board: PropTypes.string.isRequired,
-  /** List Title  */
-  title: PropTypes.string.isRequired,
-  /** List Cards  */
-  cards: PropTypes.arrayOf(PropTypes.string).isRequired
+  /** List ID for the List  */
+  listId: PropTypes.string.isRequired
 };
 
-const List = ({ board, title, cards: card }) => {
+const List = ({ listId }) => {
   const [isAdding, setIsAdding] = useState(false);
-  const [cards, setCards] = useState(card || []);
+  const [cards, setCards] = useState([]);
   const [cardText, setCardText] = useState(null);
-  const [editIndex, setEditIndex] = useState(null);
+  const [editId, setEditId] = useState(null);
 
   const inputRef = useRef();
   const btnRef = useRef();
 
-  useMemo(() => setCards(card), [card]);
+  const name = useSelector((state) => state.lists[listId].name);
+  const cardsUS = useSelector((state) => state.lists[listId].cards);
+
+  useMemo(() => setCards(cardsUS), [cardsUS]);
 
   const dispatch = useDispatch();
 
@@ -38,7 +38,8 @@ const List = ({ board, title, cards: card }) => {
   const handleSaveCard = (e) => {
     if (!e.key || e.key === 'Enter') {
       if (cardText) {
-        dispatch(MODIFYCARD({ board, list: title, card: cardText }));
+        const cardId = 'c' + getNewId();
+        dispatch(CREATECARD({ cardId, listId, description: cardText }));
         setCardText({ cardText });
         inputRef.current.value = null;
       }
@@ -54,7 +55,7 @@ const List = ({ board, title, cards: card }) => {
     } else {
       setIsAdding(false);
       setCardText(null);
-      setEditIndex(null);
+      setEditId(null);
     }
     /*  setIsAdding(false); */
   };
@@ -63,17 +64,17 @@ const List = ({ board, title, cards: card }) => {
     setCardText(e.target.value);
   };
 
-  const handleStartEdit = (index, desc) => {
-    setEditIndex(index);
+  const handleStartEdit = (key, desc) => {
+    setEditId(key);
     setCardText(desc);
   };
 
   const handleSaveEdit = (e) => {
     if (!e.key || e.key === 'Enter') {
       if (cardText) {
-        dispatch(MODIFYCARD({ board, list: title, card: cardText, index: editIndex }));
+        dispatch(UPDATECARD({ cardId: editId, newValues: { description: cardText } }));
         setCardText(null);
-        setEditIndex(null);
+        setEditId(null);
       }
       e.preventDefault();
     }
@@ -81,19 +82,19 @@ const List = ({ board, title, cards: card }) => {
 
   return (
     <div className={`${styles.list} card mb-4`}>
-      <h6 className="card-title mb-0 ms-3 mt-2">{title}</h6>
+      <h6 className="card-title mb-0 ms-3 mt-2">{name}</h6>
       {/**
        * multiple editable cards in the list
        */}
       <div className="card-body px-2 py-0 mt-2">
         {cards &&
-          cards.map((desc, index) => {
-            if (editIndex === index) {
+          cards.map((cardId) => {
+            if (cardId === editId) {
               return (
                 /**
                  * card edit section
                  */
-                <div className="container-fluid mb-3 px-0" key={desc}>
+                <div className="container-fluid mb-3 px-0" key={cardId}>
                   <div className="row mx-0">
                     <div className="col-12 p-0">
                       <CardInput
@@ -103,7 +104,7 @@ const List = ({ board, title, cards: card }) => {
                         onKeyPress={handleSaveEdit}
                         onBlur={handleCancelCard}
                         placeholder="Enter card description..."
-                        defaultValue={desc}
+                        defaultValue={cardText}
                       />
                     </div>
                   </div>
@@ -133,13 +134,7 @@ const List = ({ board, title, cards: card }) => {
                 </div>
               );
             }
-            return (
-              <CardDisplay
-                key={desc}
-                description={desc}
-                onClick={() => handleStartEdit(index, desc)}
-              />
-            );
+            return <CardDisplay key={cardId} cardId={cardId} onClick={handleStartEdit} />;
           })}
 
         {/**

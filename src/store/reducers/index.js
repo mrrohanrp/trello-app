@@ -1,4 +1,14 @@
 import { combineReducers } from 'redux';
-import modify from './modify';
+import boardsReducer from './boardsReducer';
+import cardsReducer from './cardsReducer';
+import listsReducer from './listsReducer';
+import uiReducer from './uiReducer';
 
-export default combineReducers({ modify });
+const rootReducer = combineReducers({
+  boards: boardsReducer,
+  lists: listsReducer,
+  cards: cardsReducer,
+  ui: uiReducer
+});
+
+export default rootReducer;

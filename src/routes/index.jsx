@@ -12,7 +12,7 @@ const index = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="board/:boardName" element={<Boards />} />
+          <Route path="board/:bid/:boardName" element={<Boards />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
