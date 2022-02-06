@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import List from './List';
 import styles from './Board.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { CREATELIST, DELETELIST, UPDATEBOARD, DELETEBOARD } from '../store/actions';
+import { CREATELIST, DELETELIST, UPDATEBOARD, DELETEBOARD, UPDATECOLOR } from '../store/actions';
 import { Button } from 'react-bootstrap';
 import { getNewId } from '../utils/utils';
 import { Link } from 'react-router-dom';
@@ -65,6 +65,7 @@ const Board = ({ boardId }) => {
   };
 
   const handleDeleteBoard = () => {
+    dispatch(UPDATECOLOR({ color: 'blue' }));
     dispatch(DELETEBOARD({ boardId, cardIds: cards, listIds: lists }));
   };
 
