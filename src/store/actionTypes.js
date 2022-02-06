@@ -23,4 +23,3 @@ export const DELETE_CARD = 'DELETE_CARD';
  * UI ActionTypes
  */
 export const UPDATE_COLOR = 'UPDATE_COLOR';
-export const ADD_RECENT = 'ADD_RECENT';

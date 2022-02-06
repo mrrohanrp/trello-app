@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import List from './List';
 import styles from './Board.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { CREATELIST, ADDRECENT, DELETELIST } from '../store/actions';
+import { CREATELIST, DELETELIST, UPDATEBOARD, DELETEBOARD } from '../store/actions';
 import { Button } from 'react-bootstrap';
 import { getNewId } from '../utils/utils';
+import { Link } from 'react-router-dom';
 
 const propTypes = {
   /** Board ID for board */
@@ -20,11 +21,14 @@ const Board = ({ boardId }) => {
   const lists = useSelector((state) => state.boards[boardId].lists);
   const name = useSelector((state) => state.boards[boardId].name);
   const color = useSelector((state) => state.ui.color);
+  const starred = useSelector((state) => state.boards[boardId].starred);
+  const listUS = useSelector((state) => state.lists);
+  const cards = lists.reduce((prev, id) => [...prev, ...listUS[id].cards], []);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(ADDRECENT({ boardId }));
+    dispatch(UPDATEBOARD({ boardId, newValues: { accessed: new Date() } }));
   }, [boardId, dispatch]);
 
   const handleAddList = () => {
@@ -60,11 +64,42 @@ const Board = ({ boardId }) => {
     dispatch(DELETELIST({ listId, boardId, cardIds: cards }));
   };
 
+  const handleDeleteBoard = () => {
+    dispatch(DELETEBOARD({ boardId, cardIds: cards, listIds: lists }));
+  };
+
+  const handleStarred = () => {
+    dispatch(UPDATEBOARD({ boardId, newValues: { starred: !starred } }));
+  };
+
   return (
     <>
       {lists ? (
         <div className="d-flex flex-column w-100 h-100 pb-4">
-          <h3>{name}</h3>
+          {/**
+           * Board Header
+           */}
+          <div className="row mx-0 mb-3 align-items-center">
+            <div className="col-auto">
+              <h3 className="board-header-title">{name}</h3>
+            </div>
+            <div className="col-auto">
+              <button type="button" className="btn board-header-icon" onClick={handleStarred}>
+                {starred ? '🌟' : '⭐'}
+              </button>
+            </div>
+            <div className="col-auto ms-auto">
+              <Link
+                type="button"
+                className="btn board-header-icon"
+                onClick={handleDeleteBoard}
+                to="/"
+              >
+                🗑
+              </Link>
+            </div>
+          </div>
+
           <div className="d-flex flex-row h-100 flex-wrap">
             {/**
              * for list

@@ -6,31 +6,36 @@ const initialState = {
     name: 'Default',
     color: 'blue',
     lists: ['lid1', 'lid2', 'lid3'],
-    starred: false
+    starred: false,
+    accessed: null
   },
   bid2: {
     name: 'Board Orange',
     color: 'orange',
     lists: ['lid4', 'lid5'],
-    starred: false
+    starred: false,
+    accessed: null
   },
   bid3: {
     name: 'Board Pink',
     color: 'pink',
     lists: [],
-    starred: false
+    starred: false,
+    accessed: null
   },
   bid4: {
     name: 'Board Mint',
     color: 'mint',
     lists: [],
-    starred: false
+    starred: false,
+    accessed: null
   },
   bid5: {
     name: 'Board Sky',
     color: 'sky',
     lists: [],
-    starred: false
+    starred: false,
+    accessed: null
   }
 };
 
@@ -40,7 +45,8 @@ function createBoard(state, action) {
     name,
     color,
     starred: false,
-    lists: []
+    lists: [],
+    accessed: null
   };
   return updateObj(state, { [boardId]: newBoard });
 }

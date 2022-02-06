@@ -1,4 +1,4 @@
-import { CREATE_CARD, UPDATE_CARD, DELETE_CARD, DELETE_LIST } from '../actionTypes';
+import { CREATE_CARD, UPDATE_CARD, DELETE_CARD, DELETE_LIST, DELETE_BOARD } from '../actionTypes';
 import { deleteFromObj, updateObj } from '../../utils/utils';
 
 const initialState = {
@@ -62,6 +62,8 @@ const cardsReducer = (state = initialState, action) => {
       return deleteFromObj(state, action.payload.cardId);
     case DELETE_LIST:
       return deleteList(state, action);
+    case DELETE_BOARD:
+      return deleteFromObj(state, action.payload.cardIds);
     default:
       return state;
   }

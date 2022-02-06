@@ -8,8 +8,7 @@ import {
   CREATE_CARD,
   UPDATE_CARD,
   DELETE_CARD,
-  UPDATE_COLOR,
-  ADD_RECENT
+  UPDATE_COLOR
 } from './actionTypes.js';
 
 /**
@@ -37,4 +36,3 @@ export const DELETECARD = (payload) => ({ type: DELETE_CARD, payload });
  * UI Actions
  */
 export const UPDATECOLOR = (payload) => ({ type: UPDATE_COLOR, payload });
-export const ADDRECENT = (payload) => ({ type: ADD_RECENT, payload });
