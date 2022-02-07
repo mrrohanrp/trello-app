@@ -1,0 +1,9 @@
+.drop_preview {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  height: 12rem;
+
+  border: none;
+  & > * {
+    visibility: hidden;
+  }
+}

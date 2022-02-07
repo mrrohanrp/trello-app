@@ -7,6 +7,7 @@ import { CREATELIST, DELETELIST, UPDATEBOARD, DELETEBOARD, UPDATECOLOR } from '.
 import { Button } from 'react-bootstrap';
 import { getNewId } from '../utils/utils';
 import { Link } from 'react-router-dom';
+import ListContainer from './ListContainer';
 
 const propTypes = {
   /** Board ID for board */
@@ -105,11 +106,15 @@ const Board = ({ boardId }) => {
             {/**
              * for list
              */}
-            {lists.map((listId) => (
+            {lists.map((listId, index) => (
               <div className="col-auto ms-0 me-2 px-0" key={listId}>
-                {<List listId={listId} onDelete={handleDeleteList} />}
+                <ListContainer index={index} boardId={boardId}>
+                  <List boardId={boardId} listId={listId} onDeleteList={handleDeleteList} />
+                </ListContainer>
               </div>
             ))}
+
+            <ListContainer index={lists.length} boardId={boardId} />
 
             {/**
              * button for adding lists

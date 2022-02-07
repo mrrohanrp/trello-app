@@ -8,7 +8,13 @@ import {
   CREATE_CARD,
   UPDATE_CARD,
   DELETE_CARD,
-  UPDATE_COLOR
+  UPDATE_COLOR,
+  ADD_CARD,
+  MOVE_CARD,
+  REMOVE_CARD,
+  ADD_LIST,
+  REMOVE_LIST,
+  MOVE_LIST
 } from './actionTypes.js';
 
 /**
@@ -17,6 +23,9 @@ import {
 export const CREATEBOARD = (payload) => ({ type: CREATE_BOARD, payload });
 export const UPDATEBOARD = (payload) => ({ type: UPDATE_BOARD, payload });
 export const DELETEBOARD = (payload) => ({ type: DELETE_BOARD, payload });
+export const ADDLIST = (payload) => ({ type: ADD_LIST, payload });
+export const REMOVELIST = (payload) => ({ type: REMOVE_LIST, payload });
+export const MOVELIST = (payload) => ({ type: MOVE_LIST, payload });
 
 /**
  * List Actions
@@ -24,6 +33,9 @@ export const DELETEBOARD = (payload) => ({ type: DELETE_BOARD, payload });
 export const CREATELIST = (payload) => ({ type: CREATE_LIST, payload });
 export const UPDATELIST = (payload) => ({ type: UPDATE_LIST, payload });
 export const DELETELIST = (payload) => ({ type: DELETE_LIST, payload });
+export const ADDCARD = (payload) => ({ type: ADD_CARD, payload });
+export const REMOVECARD = (payload) => ({ type: REMOVE_CARD, payload });
+export const MOVECARD = (payload) => ({ type: MOVE_CARD, payload });
 
 /**
  * Card Actions

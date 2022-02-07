@@ -1,4 +1,13 @@
-import { CREATE_BOARD, UPDATE_BOARD, DELETE_BOARD, CREATE_LIST, DELETE_LIST } from '../actionTypes';
+import {
+  CREATE_BOARD,
+  UPDATE_BOARD,
+  DELETE_BOARD,
+  CREATE_LIST,
+  DELETE_LIST,
+  ADD_LIST,
+  MOVE_LIST,
+  REMOVE_LIST
+} from '../actionTypes';
 import { deleteFromObj, updateObj } from '../../utils/utils';
 
 const initialState = {
@@ -71,6 +80,24 @@ function deleteList(state, action) {
   return updateObj(state, { [boardId]: updatedBoard });
 }
 
+function addListAtIndex(state, action) {
+  const { index, boardId, listId } = action.payload;
+  const newLists = state[boardId].lists.slice();
+  newLists.splice(index, 0, listId);
+  const updatedList = updateObj(state[boardId], { lists: newLists });
+  return updateObj(state, { [boardId]: updatedList });
+}
+
+function moveList(state, action) {
+  const { index, boardId, listId } = action.payload;
+  const initialIndex = state[boardId].lists.indexOf(listId);
+  const finalIndex = index > initialIndex ? index - 1 : index;
+  const newLists = state[boardId].lists.filter((id) => id !== listId);
+  newLists.splice(finalIndex, 0, listId);
+  const updatedList = updateObj(state[boardId], { lists: newLists });
+  return updateObj(state, { [boardId]: updatedList });
+}
+
 const boardsReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_BOARD:
@@ -81,8 +108,13 @@ const boardsReducer = (state = initialState, action) => {
       return deleteFromObj(state, action.payload.boardId);
     case CREATE_LIST:
       return createList(state, action);
+    case REMOVE_LIST:
     case DELETE_LIST:
       return deleteList(state, action);
+    case ADD_LIST:
+      return addListAtIndex(state, action);
+    case MOVE_LIST:
+      return moveList(state, action);
     default:
       return state;
   }

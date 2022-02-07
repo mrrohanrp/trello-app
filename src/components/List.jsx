@@ -7,15 +7,19 @@ import CardInput from './CardInput';
 import styles from './List.module.scss';
 import { Button } from 'react-bootstrap';
 import { getNewId } from '../utils/utils';
+import CardContainer from './CardContainer';
+import { useDrag } from 'react-dnd';
 
 const propTypes = {
   /** List ID for the List  */
   listId: PropTypes.string.isRequired,
+  /** Board ID for the List  */
+  boardId: PropTypes.string,
   /** Delete list function for the List  */
-  onDelete: PropTypes.func.isRequired
+  onDeleteList: PropTypes.func
 };
 
-const List = ({ listId, onDelete }) => {
+const List = ({ listId, boardId, onDeleteList }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [cards, setCards] = useState([]);
   const [cardText, setCardText] = useState(null);
@@ -81,12 +85,20 @@ const List = ({ listId, onDelete }) => {
     }
   };
 
+  const [{ isDragging }, drag] = useDrag({
+    type: 'LIST',
+    item: { id: listId, originId: boardId, type: 'LIST' },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging()
+    })
+  });
+
   return (
-    <div className={`${styles.list} card mb-4`}>
+    <div ref={drag} className={`${styles.list} card mb-4 ${isDragging ? 'd-none' : ''}`}>
       <div className="card-title container px-0">
         <div className="d-flex mx-0">
           <span className="card-title mb-0 ms-3 mt-2 h6">{name}</span>
-          <button onClick={() => onDelete(listId, cards)} className="btn px-2 ms-auto ">
+          <button onClick={() => onDeleteList(listId, cards)} className="btn px-2 ms-auto ">
             🗑
           </button>
         </div>
@@ -96,7 +108,7 @@ const List = ({ listId, onDelete }) => {
        */}
       <div className="card-body px-2 py-0">
         {cards &&
-          cards.map((cardId) => {
+          cards.map((cardId, index) => {
             if (cardId === editId) {
               return (
                 /**
@@ -141,8 +153,14 @@ const List = ({ listId, onDelete }) => {
                 </div>
               );
             }
-            return <CardDisplay key={cardId} cardId={cardId} onClick={handleStartEdit} />;
+            return (
+              <CardContainer index={index} listId={listId} key={cardId}>
+                <CardDisplay cardId={cardId} listId={listId} onClick={handleStartEdit} />
+              </CardContainer>
+            );
           })}
+
+        <CardContainer index={cards.length} listId={listId} />
 
         {/**
          *  textarea for adding card
