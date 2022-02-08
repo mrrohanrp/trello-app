@@ -14,7 +14,8 @@ import {
   REMOVE_CARD,
   ADD_LIST,
   REMOVE_LIST,
-  MOVE_LIST
+  MOVE_LIST,
+  UPDATE_UI
 } from './actionTypes.js';
 
 /**
@@ -48,3 +49,4 @@ export const DELETECARD = (payload) => ({ type: DELETE_CARD, payload });
  * UI Actions
  */
 export const UPDATECOLOR = (payload) => ({ type: UPDATE_COLOR, payload });
+export const UPDATEUI = (payload) => ({ type: UPDATE_UI, payload });

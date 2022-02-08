@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import List from './List';
 import styles from './Board.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { CREATELIST, DELETELIST, UPDATEBOARD, DELETEBOARD, UPDATECOLOR } from '../store/actions';
+import { CREATELIST, DELETELIST, UPDATEBOARD, DELETEBOARD, UPDATEUI } from '../store/actions';
 import { Button } from 'react-bootstrap';
 import { getNewId } from '../utils/utils';
 import { Link } from 'react-router-dom';
@@ -21,7 +21,6 @@ const Board = ({ boardId }) => {
 
   const lists = useSelector((state) => state.boards[boardId].lists);
   const name = useSelector((state) => state.boards[boardId].name);
-  const color = useSelector((state) => state.ui.color);
   const starred = useSelector((state) => state.boards[boardId].starred);
   const listUS = useSelector((state) => state.lists);
   const cards = lists.reduce((prev, id) => [...prev, ...listUS[id].cards], []);
@@ -66,7 +65,7 @@ const Board = ({ boardId }) => {
   };
 
   const handleDeleteBoard = () => {
-    dispatch(UPDATECOLOR({ color: 'blue' }));
+    dispatch(UPDATEUI({ color: 'blue', img: null }));
     dispatch(DELETEBOARD({ boardId, cardIds: cards, listIds: lists }));
   };
 
@@ -81,7 +80,7 @@ const Board = ({ boardId }) => {
           {/**
            * Board Header
            */}
-          <div className="row mx-0 mb-3 align-items-center">
+          <div className="row mx-0 mb-3 align-items-center text-white">
             <div className="col-auto">
               <h3 className="board-header-title">{name}</h3>
             </div>
@@ -93,7 +92,7 @@ const Board = ({ boardId }) => {
             <div className="col-auto ms-auto">
               <Link
                 type="button"
-                className="btn board-header-icon"
+                className="btn board-header-icon text-white"
                 onClick={handleDeleteBoard}
                 to="/"
               >
@@ -153,7 +152,7 @@ const Board = ({ boardId }) => {
                 </div>
               ) : (
                 <Button
-                  className={`${styles.board_list_add} text-start text-white bg-light-${color} bg-${color}-hover`}
+                  className={`${styles.board_list_add} text-start text-white bg-trans bg-trans-hover border-0`}
                   onClick={handleAddList}
                 >
                   {lists?.length ? '+ Add another list' : '+ Add a list'}

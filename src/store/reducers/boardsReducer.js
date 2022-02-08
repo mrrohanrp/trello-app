@@ -12,36 +12,89 @@ import { deleteFromObj, updateObj } from '../../utils/utils';
 
 const initialState = {
   bid1: {
-    name: 'Default',
-    color: 'blue',
+    name: 'Earth',
+    color: null,
+    img: 'earth',
     lists: ['lid1', 'lid2', 'lid3'],
-    starred: false,
+    starred: true,
     accessed: null
   },
   bid2: {
-    name: 'Board Orange',
-    color: 'orange',
+    name: 'Beach',
+    color: null,
+    img: 'beach',
     lists: ['lid4', 'lid5'],
     starred: false,
     accessed: null
   },
   bid3: {
-    name: 'Board Pink',
-    color: 'pink',
+    name: 'Vase',
+    color: null,
+    img: 'vase',
     lists: [],
     starred: false,
     accessed: null
   },
   bid4: {
-    name: 'Board Mint',
-    color: 'mint',
+    name: 'Forest',
+    color: null,
+    img: 'forest',
+    lists: [],
+    starred: true,
+    accessed: null
+  },
+  bid5: {
+    name: 'Balloon',
+    color: null,
+    img: 'balloon',
+    lists: [],
+    starred: true,
+    accessed: null
+  },
+  bid6: {
+    name: 'Sunset',
+    color: null,
+    img: 'sunset',
     lists: [],
     starred: false,
     accessed: null
   },
-  bid5: {
+  bid7: {
+    name: 'Board Blue',
+    color: 'blue',
+    img: null,
+    lists: [],
+    starred: false,
+    accessed: null
+  },
+  bid8: {
+    name: 'Board Orange',
+    color: 'orange',
+    img: null,
+    lists: [],
+    starred: false,
+    accessed: null
+  },
+  bid9: {
+    name: 'Board Pink',
+    color: 'pink',
+    img: null,
+    lists: [],
+    starred: false,
+    accessed: null
+  },
+  bid10: {
+    name: 'Board Mint',
+    color: 'mint',
+    img: null,
+    lists: [],
+    starred: false,
+    accessed: null
+  },
+  bid11: {
     name: 'Board Sky',
     color: 'sky',
+    img: null,
     lists: [],
     starred: false,
     accessed: null
@@ -49,10 +102,11 @@ const initialState = {
 };
 
 function createBoard(state, action) {
-  const { boardId, name, color } = action.payload;
+  const { boardId, name, color, img } = action.payload;
   const newBoard = {
     name,
     color,
+    img,
     starred: false,
     lists: [],
     accessed: null

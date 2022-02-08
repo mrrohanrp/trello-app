@@ -2,6 +2,14 @@
 /**
   * Colors and Shades
   */
+$transparent-white-24: rgba(255, 255, 255, 0.24);
+$transparent-white-32: rgba(255, 255, 255, 0.32);
+$transparent-white-45: rgba(255, 255, 255, 0.45);
+$transparent-white-60: rgba(255, 255, 255, 0.6);
+$transparent-white-80: rgba(255, 255, 255, 0.8);
+$transparent-black-24: rgba(0, 0, 0, 0.24);
+$transparent-black-45: rgba(0, 0, 0, 0.45);
+
 $color-map: (
   'blue': (
     'light': #3d99ce,
@@ -47,6 +55,11 @@ $color-map: (
     'light': #a1a8ab,
     'normal': #838c91,
     'dark': #484d50
+  ),
+  'img': (
+    'light': transparent,
+    'normal': $transparent-black-24,
+    'dark': $transparent-black-45
   )
 );
 
@@ -77,4 +90,28 @@ $color-map: (
   .text-#{$name} {
     color: $normal;
   }
+}
+
+.bg-trans {
+  background-color: $transparent-white-24;
+}
+
+.bg-trans-dark {
+  background-color: $transparent-black-45;
+}
+
+.bg-trans-hover:hover {
+  background-color: $transparent-white-32;
+}
+
+.bg-trans-dark-hover:hover {
+  background-color: $transparent-black-24;
+}
+
+.text-trans {
+  color: $transparent-white-60;
+}
+
+.text-trans-hover:hover {
+  color: $transparent-white-80;
 }

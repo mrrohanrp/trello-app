@@ -1,0 +1,51 @@
+$img-urls: (
+  earth: url('../../assets/bg/1h-javier-miranda-Jn2EaLLYZfY-unsplash.jpg'),
+  beach: url('../../assets/bg/2h-geio-tischler-qA0ij7Dmu10-unsplash.jpg'),
+  vase: url('../../assets/bg/3h-ronald-cuyan-r3zwmXTXpmA-unsplash.jpg'),
+  balloon: url('../../assets/bg/4h-victoria-rokita-La2kOu2dmH4-unsplash.jpg'),
+  sunset: url('../../assets/bg/5h-frank-mckenna-4V8JxijgZ_c-unsplash.jpg'),
+  forest: url('../../assets/bg/6h-max-okhrimenko-R-CoXmMrWFk-unsplash.jpg')
+);
+
+$img-small-urls: (
+  earth: url('../../assets/bg/1s-javier-miranda-Jn2EaLLYZfY-unsplash.jpg'),
+  beach: url('../../assets/bg/2s-geio-tischler-qA0ij7Dmu10-unsplash.jpg'),
+  vase: url('../../assets/bg/3s-ronald-cuyan-r3zwmXTXpmA-unsplash.jpg'),
+  balloon: url('../../assets/bg/4s-victoria-rokita-La2kOu2dmH4-unsplash.jpg'),
+  sunset: url('../../assets/bg/5s-frank-mckenna-4V8JxijgZ_c-unsplash.jpg'),
+  forest: url('../../assets/bg/6s-max-okhrimenko-R-CoXmMrWFk-unsplash.jpg')
+);
+
+@each $img, $url in $img-urls {
+  .bg-img-#{$img} {
+    background-image: $url;
+    background-color: white;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+
+@each $img, $url in $img-small-urls {
+  .bg-img-small-#{$img} {
+    background-image: $url;
+    background-color: white;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border: none;
+  }
+}
+@each $img, $url in $img-small-urls {
+  .bg-img-small-#{$img}-hover:hover::after {
+    background: $transparent-black-24;
+    position: absolute;
+    content: '';
+    display: block;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 3px;
+    z-index: 0;
+  }
+}

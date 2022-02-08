@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import BoardAdd from '../components/BoardAdd';
 import BoardsSection from '../components/BoardsSection';
-import { UPDATEBOARD, UPDATECOLOR } from '../store/actions';
+import { UPDATEBOARD, UPDATEUI } from '../store/actions';
 
 const propTypes = {
   /** Board ID to display board */
@@ -14,18 +14,23 @@ const propTypes = {
 export const BoardDisplay = ({ boardId }) => {
   const name = useSelector((state) => state.boards[boardId].name);
   const color = useSelector((state) => state.boards[boardId].color);
+  const img = useSelector((state) => state.boards[boardId].img);
   const starred = useSelector((state) => state.boards[boardId].starred);
 
   const dispatch = useDispatch();
   return (
-    <div className="col-lg-2 col-md-3 col-sm-4 my-2">
+    <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6 my-2" style={{ height: '6rem' }}>
       <Link
         to={`board/${boardId}/${name}`}
         role="button"
-        className={`btn btn-block text-start h-100 w-100 bg-${color} bg-${color}-hover`}
-        onClick={() => dispatch(UPDATECOLOR({ color }))}
+        className={`btn btn-block text-start h-100 w-100  ${
+          img ? `bg-img-small-${img} position-relative` : `bg-${color} bg-${color}-hover`
+        }`}
+        onClick={() => {
+          dispatch(UPDATEUI({ color, img }));
+        }}
       >
-        <div className="container h-100 px-0">
+        <div className={`container h-100 px-0 ${img ? ` bg-img-small-${img}-hover` : ''}`}>
           <div className="row mx-0 h-75">
             <p className="board-display-title fw-bolder h5 h-100 text-white text-break">{name}</p>
           </div>
@@ -38,6 +43,7 @@ export const BoardDisplay = ({ boardId }) => {
                 e.preventDefault();
                 e.stopPropagation();
               }}
+              style={{ zIndex: '1000' }}
             >
               {starred ? '🌟' : '⭐'}
             </button>
@@ -58,7 +64,7 @@ const Home = () => {
     .slice(0, 4);
 
   return (
-    <div className="content container-fluid py-4">
+    <div className="content container-fluid py-4 bg-white">
       {/**
        * Boards Section
        */}

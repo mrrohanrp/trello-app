@@ -7,9 +7,12 @@ import { getNewId } from '../utils/utils';
 
 const colors = ['blue', 'orange', 'green', 'red', 'purple', 'pink', 'mint', 'sky', 'gray'];
 
+const images = ['earth', 'beach', 'vase', 'balloon', 'sunset', 'forest'];
+
 const BoardAdd = () => {
   const [name, setName] = useState('');
   const [color, setColor] = useState('blue');
+  const [img, setImg] = useState(null);
   const [modalShow, setModalShow] = useState(false);
 
   const inputRef = useRef();
@@ -30,12 +33,18 @@ const BoardAdd = () => {
 
   const handleClickColor = (e) => {
     setColor(e.target.value);
+    setImg(null);
+  };
+
+  const handleClickImg = (e) => {
+    setColor(null);
+    setImg(e.target.value);
   };
 
   const handleClickAdd = (e) => {
     if (!e.key || e.key === 'Enter') {
       const boardId = 'b' + getNewId();
-      dispatch(CREATEBOARD({ boardId, name, color }));
+      dispatch(CREATEBOARD({ boardId, name, color, img }));
       setName('');
       handleModalClose();
     }
@@ -47,7 +56,7 @@ const BoardAdd = () => {
 
   return (
     <>
-      <div className="col-lg-2 col-md-3 col-sm-4 my-2">
+      <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6 my-2">
         <Button
           variant="outline-primary"
           onClick={handleModalShow}
@@ -71,13 +80,28 @@ const BoardAdd = () => {
                 <label htmlFor="background-picker">Background</label>
               </div>
               <ul id="background-picker" className="d-flex p-0 mb-2">
+                {images.map((img) => (
+                  <li className={`${styles.color_picker_img} me-2`} key={img}>
+                    <Button
+                      className={`btn h-100 w-100 ${
+                        img ? `bg-img-small-${img} bg-img-small-${img}-hover` : 'bg-blue'
+                      }`}
+                      id={`option-${img}`}
+                      title={`img-${img}`}
+                      value={`${img}`}
+                      onClick={handleClickImg}
+                    />
+                  </li>
+                ))}
+              </ul>
+              <ul id="background-picker" className="d-flex p-0 mb-2">
                 {colors.map((color) => (
                   <li className={`${styles.color_picker} me-2`} key={color}>
                     <Button
                       className={`btn bg-${color} bg-${color}-hover h-100 w-100`}
                       id={`option-${color}`}
-                      title={color}
-                      value={color}
+                      title={`${color}`}
+                      value={`${color}`}
                       onClick={handleClickColor}
                     />
                   </li>
@@ -123,10 +147,10 @@ const BoardAdd = () => {
             Close
           </Button>
           <Button
-            variant="secondary"
+            variant="success"
             onClick={handleClickAdd}
-            disabled={!name || !color}
-            className={`bg-${color} bg-${color}-hover`}
+            disabled={!name || (!color && !img)}
+            className={`bg-${color} bg-${color}-hover ${img ? `bg-success` : ''} `}
           >
             Create Board
           </Button>
