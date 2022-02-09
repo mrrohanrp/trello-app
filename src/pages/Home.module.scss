@@ -1,0 +1,18 @@
+.board_tile {
+  &:hover {
+    & .board_star_icon {
+      margin-right: 6px;
+      opacity: 1;
+      width: 18px;
+    }
+  }
+}
+
+.board_star_icon {
+  opacity: 0;
+  width: 0;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  transition-duration: 0.15s;
+  transition-property: opacity, transform, width, margin;
+}

@@ -1,4 +1,14 @@
 .card_display {
   box-shadow: 0 1px 0 #091e4240;
   cursor: pointer;
+
+  &:hover {
+    & .card_edit_button {
+      opacity: 1;
+    }
+  }
+}
+
+.card_edit_button {
+  opacity: 0;
 }

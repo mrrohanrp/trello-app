@@ -8,6 +8,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import './styles/index.scss';
 import App from './App';
 import store from './store/store';
+import './icons';
 
 ReactDOM.render(
   <React.StrictMode>

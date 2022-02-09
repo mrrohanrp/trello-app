@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const propTypes = {
   /** Title for Board Section */
@@ -15,10 +16,8 @@ const BoardsSection = ({ children, title, icon }) => {
     return (
       <div className="d-flex flex-column mx-lg-3 mx-0 mb-5">
         <div className="row mx-0 mb-2">
-          <div className="col-auto px-0">
-            <span className="me-2 h2">
-              {icon === 'star' ? '⭐' : icon === 'recent' ? '🕔' : '🤵'}
-            </span>
+          <div className="col-auto px-0 align-self-end">
+            <FontAwesomeIcon icon={icon} className="me-3 h2" />
           </div>
           <div className="col-auto px-0">
             <h2>{title}</h2>

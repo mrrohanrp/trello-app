@@ -9,6 +9,7 @@ import { getNewId } from '../utils/utils';
 import { Link } from 'react-router-dom';
 import ListContainer from './ListContainer';
 import { ScrollX } from './Scroll';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const propTypes = {
   /** Board ID for board */
@@ -83,21 +84,21 @@ const Board = ({ boardId }) => {
            */}
           <div className="row mx-0 mb-3 align-items-center text-white">
             <div className="col-auto">
-              <h3 className="board-header-title">{name}</h3>
+              <h3>{name}</h3>
             </div>
             <div className="col-auto">
-              <button type="button" className="btn board-header-icon" onClick={handleStarred}>
-                {starred ? '🌟' : '⭐'}
+              <button type="button" className="btn" onClick={handleStarred}>
+                <FontAwesomeIcon
+                  icon={starred ? 'fa-solid fa-star' : 'fa-regular fa-star'}
+                  className={`hover-transform ${
+                    starred ? 'text-warning' : 'text-trans text-trans-hover'
+                  }`}
+                />
               </button>
             </div>
             <div className="col-auto ms-auto">
-              <Link
-                type="button"
-                className="btn board-header-icon text-white"
-                onClick={handleDeleteBoard}
-                to="/"
-              >
-                🗑
+              <Link type="button" className="btn" onClick={handleDeleteBoard} to="/">
+                <FontAwesomeIcon icon="fa-solid fa-trash" className="text-trans text-trans-hover" />
               </Link>
             </div>
           </div>
@@ -153,10 +154,11 @@ const Board = ({ boardId }) => {
                 </div>
               ) : (
                 <Button
-                  className={`${styles.board_list_add} text-start text-white bg-trans bg-trans-hover border-0`}
+                  className={`${styles.board_list_add} text-start text-white bg-trans bg-trans-hover border-0 px-3 text-decoration-none`}
                   onClick={handleAddList}
                 >
-                  {lists?.length ? '+ Add another list' : '+ Add a list'}
+                  <FontAwesomeIcon icon="plus" className="small" />
+                  {lists?.length ? ' Add another list' : ' Add a list'}
                 </Button>
               )}
             </div>

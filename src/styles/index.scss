@@ -37,5 +37,10 @@ textarea {
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
+} */
+
+.hover-transform {
+  &:hover {
+    transform: scale(1.2);
+  }
 }
- */

@@ -4,6 +4,7 @@ import styles from './CardDisplay.module.scss';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const propTypes = {
   /** Card ID for Card List */
@@ -37,10 +38,13 @@ const CardDisplay = ({ cardId, listId, onClick }) => {
         <div className="col-1 px-0">
           <Button
             variant="light"
-            className="p-1 card-edit-button"
+            className={`${styles.card_edit_button} p-1`}
             onClick={() => onClick(cardId, description)}
           >
-            🖋
+            <FontAwesomeIcon
+              icon="fa-solid fa-pen"
+              className="text-trans-dark text-trans-dark-hover"
+            />
           </Button>
         </div>
       </div>

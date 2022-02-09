@@ -10,6 +10,7 @@ import { getNewId } from '../utils/utils';
 import CardContainer from './CardContainer';
 import { useDrag } from 'react-dnd';
 import { ScrollY } from './Scroll';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const propTypes = {
   /** List ID for the List  */
@@ -103,8 +104,11 @@ const List = ({ listId, boardId, onDeleteList }) => {
       <div className="card-title container px-0">
         <div className="d-flex mx-0">
           <span className="card-title mb-0 ms-3 mt-2 h6">{name}</span>
-          <button onClick={() => onDeleteList(listId, cards)} className="btn px-2 ms-auto ">
-            🗑
+          <button
+            onClick={() => onDeleteList(listId, cards)}
+            className={`${styles.delete_list_btn} btn px-2 ms-auto`}
+          >
+            <FontAwesomeIcon className="text-trans-dark text-trans-dark-hover" icon="trash" />
           </button>
         </div>
       </div>
@@ -194,13 +198,14 @@ const List = ({ listId, boardId, onDeleteList }) => {
         </div>
       ) : (
         <div
-          className={`${styles.list_footer} card-footer text-secondary p-2 border-top-0`}
+          className={`${styles.list_footer} card-footer text-secondary p-2 border-top-0 px-3 text-decoration-none`}
           role="button"
           tabIndex={0}
           onKeyPress={handleAddCard}
           onClick={handleAddCard}
         >
-          {cards?.length ? '+ Add another card' : '+ Add a card'}
+          <FontAwesomeIcon icon="plus" className="small" />
+          {cards?.length ? ' Add another card' : ' Add a card'}
         </div>
       )}
     </div>

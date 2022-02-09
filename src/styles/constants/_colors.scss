@@ -116,3 +116,11 @@ $color-map: (
 .text-trans-hover:hover {
   color: $transparent-white-80;
 }
+
+.text-trans-dark {
+  color: $transparent-black-24;
+}
+
+.text-trans-dark-hover:hover {
+  color: $transparent-black-45;
+}
