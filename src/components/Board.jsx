@@ -8,6 +8,7 @@ import { Button } from 'react-bootstrap';
 import { getNewId } from '../utils/utils';
 import { Link } from 'react-router-dom';
 import ListContainer from './ListContainer';
+import { ScrollX } from './Scroll';
 
 const propTypes = {
   /** Board ID for board */
@@ -76,7 +77,7 @@ const Board = ({ boardId }) => {
   return (
     <>
       {lists ? (
-        <div className="d-flex flex-column w-100 h-100 pb-4">
+        <div className="d-flex flex-column w-100 h-100 pb-2 px-2">
           {/**
            * Board Header
            */}
@@ -101,7 +102,7 @@ const Board = ({ boardId }) => {
             </div>
           </div>
 
-          <div className="d-flex flex-row h-100 flex-wrap">
+          <ScrollX mods="d-flex flex-row h-100 ">
             {/**
              * for list
              */}
@@ -159,7 +160,7 @@ const Board = ({ boardId }) => {
                 </Button>
               )}
             </div>
-          </div>
+          </ScrollX>
         </div>
       ) : (
         /**

@@ -9,6 +9,7 @@ import { Button } from 'react-bootstrap';
 import { getNewId } from '../utils/utils';
 import CardContainer from './CardContainer';
 import { useDrag } from 'react-dnd';
+import { ScrollY } from './Scroll';
 
 const propTypes = {
   /** List ID for the List  */
@@ -94,7 +95,11 @@ const List = ({ listId, boardId, onDeleteList }) => {
   });
 
   return (
-    <div ref={drag} className={`${styles.list} card mb-4 ${isDragging ? 'd-none' : ''}`}>
+    <div
+      ref={drag}
+      className={`${styles.list} card ${isDragging ? 'd-none' : ''}`}
+      style={{ maxHeight: 'calc(100vh - 155px)' }}
+    >
       <div className="card-title container px-0">
         <div className="d-flex mx-0">
           <span className="card-title mb-0 ms-3 mt-2 h6">{name}</span>
@@ -106,7 +111,7 @@ const List = ({ listId, boardId, onDeleteList }) => {
       {/**
        * multiple editable cards in the list
        */}
-      <div className="card-body px-2 py-0">
+      <ScrollY mods="card-body px-1 py-0 mx-1">
         {cards &&
           cards.map((cardId, index) => {
             if (cardId === editId) {
@@ -174,7 +179,8 @@ const List = ({ listId, boardId, onDeleteList }) => {
             onBlur={handleCancelCard}
           />
         )}
-      </div>
+      </ScrollY>
+
       {/**
        *  show add/cancel button for adding card or
        *  show `add card` placeholder

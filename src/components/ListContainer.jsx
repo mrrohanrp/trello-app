@@ -32,7 +32,7 @@ const ListContainer = ({ boardId, index, children }) => {
   });
 
   return (
-    <div ref={drop} className="pb-2">
+    <div ref={drop} className="pb-1">
       {/**
        * List drop preview
        */}
