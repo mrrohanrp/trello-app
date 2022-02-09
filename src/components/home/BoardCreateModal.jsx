@@ -1,15 +1,15 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { CREATEBOARD } from '../store/actions';
+import { CREATEBOARD } from '../../store/actions';
 import { Modal, Button } from 'react-bootstrap';
-import styles from './BoardAdd.module.scss';
-import { getNewId } from '../utils/utils';
+import styles from './BoardCreateModal.module.scss';
+import { getNewId } from '../../utils/utils';
 
 const colors = ['blue', 'orange', 'green', 'red', 'purple', 'pink', 'mint', 'sky', 'gray'];
 
 const images = ['earth', 'beach', 'vase', 'balloon', 'sunset', 'forest'];
 
-const BoardAdd = () => {
+const BoardCreateModal = () => {
   const [name, setName] = useState('');
   const [color, setColor] = useState('blue');
   const [img, setImg] = useState(null);
@@ -160,4 +160,4 @@ const BoardAdd = () => {
   );
 };
 
-export default BoardAdd;
+export default BoardCreateModal;

@@ -8,7 +8,7 @@ import { Button } from 'react-bootstrap';
 import { getNewId } from '../utils/utils';
 import { Link } from 'react-router-dom';
 import ListContainer from './ListContainer';
-import { ScrollX } from './Scroll';
+import { ScrollX } from './ui/Scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const propTypes = {

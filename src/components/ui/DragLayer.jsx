@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDragLayer } from 'react-dnd';
-import CardDisplay from './CardDisplay';
+import Card from '../Card';
 import styles from './DragLayer.module.scss';
-import List from './List';
+import List from '../List';
 
 function getCardPreviewStyle(offset) {
   const transform = `translate(${offset.x}px, ${offset.y}px) rotate(5deg)`;
@@ -19,7 +19,7 @@ function renderItem(item, offSet) {
       case 'CARD':
         return (
           <div style={getCardPreviewStyle(offSet)}>
-            <CardDisplay cardId={item.id} />
+            <Card cardId={item.id} />
           </div>
         );
       case 'LIST':

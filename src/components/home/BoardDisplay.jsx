@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import BoardAdd from '../components/BoardAdd';
-import BoardsSection from '../components/BoardsSection';
-import { UPDATEBOARD, UPDATEUI } from '../store/actions';
+import { UPDATEBOARD, UPDATEUI } from '../../store/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styles from './Home.module.scss';
+import styles from './BoardDisplay.module.scss';
 
 const propTypes = {
   /** Board ID to display board */
@@ -64,42 +62,6 @@ export const BoardDisplay = ({ boardId }) => {
   );
 };
 
-const Home = () => {
-  const boardsUS = useSelector((state) => state.boards);
-  const boards = Object.keys(boardsUS);
-  const starred = boards.filter((id) => boardsUS[id].starred);
-  const recent = boards
-    .filter((id) => !starred.includes(id) && boardsUS[id].accessed)
-    .sort((a, b) => boardsUS[b].accessed - boardsUS[a].accessed)
-    .slice(0, 4);
-
-  return (
-    <div className="content container-fluid py-4 bg-white">
-      {/**
-       * Boards Section
-       */}
-      <BoardsSection title="Starred Boards" icon="fa-regular fa-star">
-        {starred.map((boardId) => (
-          <BoardDisplay key={boardId} boardId={boardId} />
-        ))}
-      </BoardsSection>
-
-      <BoardsSection title="Recently Viewed" icon="fa-regular fa-clock">
-        {recent?.map((boardId) => (
-          <BoardDisplay key={boardId} boardId={boardId} />
-        ))}
-      </BoardsSection>
-
-      <BoardsSection title="Your Workspace" icon="fa-brands fa-trello">
-        {boards?.map((boardId) => (
-          <BoardDisplay key={boardId} boardId={boardId} />
-        ))}
-        <BoardAdd />
-      </BoardsSection>
-    </div>
-  );
-};
-
 BoardDisplay.propTypes = propTypes;
 
-export default Home;
+export default BoardDisplay;

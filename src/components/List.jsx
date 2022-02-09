@@ -2,14 +2,14 @@ import React, { useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { CREATECARD, DELETECARD, UPDATECARD } from '../store/actions';
-import CardDisplay from './CardDisplay';
+import Card from './Card';
 import CardInput from './CardInput';
 import styles from './List.module.scss';
 import { Button } from 'react-bootstrap';
 import { getNewId } from '../utils/utils';
 import CardContainer from './CardContainer';
 import { useDrag } from 'react-dnd';
-import { ScrollY } from './Scroll';
+import { ScrollY } from './ui/Scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const propTypes = {
@@ -164,7 +164,7 @@ const List = ({ listId, boardId, onDeleteList }) => {
             }
             return (
               <CardContainer index={index} listId={listId} key={cardId}>
-                <CardDisplay cardId={cardId} listId={listId} onClick={handleStartEdit} />
+                <Card cardId={cardId} listId={listId} onClick={handleStartEdit} />
               </CardContainer>
             );
           })}

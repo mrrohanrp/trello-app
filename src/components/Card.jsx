@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './CardDisplay.module.scss';
+import styles from './Card.module.scss';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
@@ -15,7 +15,7 @@ const propTypes = {
   onClick: PropTypes.func
 };
 
-const CardDisplay = ({ cardId, listId, onClick }) => {
+const Card = ({ cardId, listId, onClick }) => {
   const description = useSelector((state) => state.cards[cardId].description);
 
   const [{ isDragging }, drag] = useDrag({
@@ -52,6 +52,6 @@ const CardDisplay = ({ cardId, listId, onClick }) => {
   );
 };
 
-CardDisplay.propTypes = propTypes;
+Card.propTypes = propTypes;
 
-export default CardDisplay;
+export default Card;

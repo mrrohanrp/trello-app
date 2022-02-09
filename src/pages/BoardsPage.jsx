@@ -1,9 +1,9 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import Board from '../components/Board';
-import DragLayer from '../components/DragLayer';
+import DragLayer from '../components/ui/DragLayer';
 
-const Boards = () => {
+const BoardsPage = () => {
   const { bid } = useParams();
 
   return (
@@ -14,4 +14,4 @@ const Boards = () => {
   );
 };
 
-export default Boards;
+export default BoardsPage;
