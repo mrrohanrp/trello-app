@@ -12,4 +12,14 @@ $list-width: 19.429rem;
       width: $list-width;
     }
   }
+
+  &_textarea {
+    overflow: hidden;
+    overflow-wrap: break-word;
+    resize: none;
+    font-size: 26px;
+    font-weight: 600;
+    min-height: 2rem !important;
+    max-height: 2.25rem !important;
+  }
 }

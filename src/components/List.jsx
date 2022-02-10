@@ -1,7 +1,7 @@
 import React, { useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { CREATECARD, DELETECARD, UPDATECARD } from '../store/actions';
+import { CREATECARD, DELETECARD, UPDATECARD, UPDATELIST } from '../store/actions';
 
 import Card from './Card';
 import CardInput from './CardInput';
@@ -28,6 +28,10 @@ const List = ({ listId, boardId, onDeleteList }) => {
   const [cards, setCards] = useState([]);
   const [cardText, setCardText] = useState(null);
   const [editId, setEditId] = useState(null);
+
+  const [listText, setListText] = useState(null);
+  const [isEditingList, setIsEditingList] = useState(false);
+  const [editListId, setEditListId] = useState(null);
 
   const inputRef = useRef();
 
@@ -70,13 +74,14 @@ const List = ({ listId, boardId, onDeleteList }) => {
     setCardText(null);
   };
 
-  const handleChange = (e) => {
-    setCardText(e.target.value);
-  };
-
-  const handleStartEdit = (key, desc) => {
+  const handleStartCardEdit = (key, desc) => {
     setEditId(key);
     setCardText(desc);
+  };
+
+  const handleStartListEdit = () => {
+    setIsEditingList(true);
+    setEditListId(listId);
   };
 
   const handleSaveEdit = (e) => {
@@ -85,6 +90,15 @@ const List = ({ listId, boardId, onDeleteList }) => {
         dispatch(UPDATECARD({ cardId: editId, newValues: { description: cardText } }));
         setCardText(null);
         setEditId(null);
+      }
+      if (listText) {
+        dispatch(UPDATELIST({ listId: editListId, newValues: { name: listText } }));
+        setListText(null);
+        setEditListId(null);
+        setIsEditingList(false);
+      } else {
+        setListText(null);
+        setIsEditingList(false);
       }
     }
   };
@@ -99,8 +113,25 @@ const List = ({ listId, boardId, onDeleteList }) => {
 
   return (
     <div ref={drag} className={`${styles.list} card ${isDragging ? 'd-none' : ''}`}>
-      <div className="card-title d-flex px-0 pt-1">
-        <h3 className="card-title mb-0 ms-3 mt-2">{name}</h3>
+      {/**
+       * list title edit
+       */}
+      <div className="card-title d-flex px-0 pt-1" onClick={handleStartListEdit} role="button">
+        {isEditingList ? (
+          <textarea
+            placeholder="Enter list title..."
+            className={`${styles.list_textarea} mx-2 my-1 ps-2 pt-0 form-control`}
+            defaultValue={listText || name}
+            onChange={(e) => setListText(e.target.value)}
+            onKeyPress={handleSaveEdit}
+            onBlur={handleSaveEdit}
+            maxLength={24}
+            autoFocus
+          />
+        ) : (
+          <h3 className="card-title mb-0 ms-3 mt-2">{name}</h3>
+        )}
+
         <button
           onClick={() => onDeleteList(listId, cards)}
           className={`${styles.delete_list_btn} btn px-2 ms-auto`}
@@ -125,7 +156,7 @@ const List = ({ listId, boardId, onDeleteList }) => {
                       <CardInput
                         id="card-input"
                         ref={inputRef}
-                        onChange={handleChange}
+                        onChange={(e) => setCardText(e.target.value)}
                         onKeyPress={handleSaveEdit}
                         onBlur={handleCancelCard}
                         placeholder="Enter card description..."
@@ -160,7 +191,7 @@ const List = ({ listId, boardId, onDeleteList }) => {
             }
             return (
               <CardContainer index={index} listId={listId} key={cardId}>
-                <Card cardId={cardId} listId={listId} onClick={handleStartEdit} />
+                <Card cardId={cardId} listId={listId} onClick={handleStartCardEdit} />
               </CardContainer>
             );
           })}
@@ -174,7 +205,7 @@ const List = ({ listId, boardId, onDeleteList }) => {
           <CardInput
             id="card-input"
             ref={inputRef}
-            onChange={handleChange}
+            onChange={(e) => setCardText(e.target.value)}
             onKeyPress={handleSaveCard}
             onBlur={handleCancelCard}
           />

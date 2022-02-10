@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import { useDrag } from 'react-dnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Card.module.scss';
@@ -33,19 +32,13 @@ const Card = ({ cardId, listId, onClick }) => {
         isDragging ? 'd-none' : ''
       }`}
     >
-      <div className="row mx-0">
+      <div className="row mx-0" onClick={() => onClick(cardId, description)}>
         <div className="col-11 px-0 mb-0">{description}</div>
         <div className="col-1 px-0">
-          <Button
-            variant="light"
-            className={`${styles.card_edit_button} p-0`}
-            onClick={() => onClick(cardId, description)}
-          >
-            <FontAwesomeIcon
-              icon="fa-solid fa-pen"
-              className="text-trans-dark text-trans-dark-hover"
-            />
-          </Button>
+          <FontAwesomeIcon
+            icon="fa-solid fa-pen"
+            className={`${styles.card_edit_button} p-0 text-trans-dark text-trans-dark-hover`}
+          />
         </div>
       </div>
     </div>

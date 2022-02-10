@@ -23,6 +23,10 @@ const Board = ({ boardId }) => {
   const [listName, setListName] = useState(null);
   const inputRef = useRef();
 
+  const [boardText, setBoardText] = useState(null);
+  const [isEditingBoard, setIsEditingBoard] = useState(false);
+  const [editBoardId, setEditBoardId] = useState(null);
+
   const lists = useSelector((state) => state.boards[boardId].lists);
   const name = useSelector((state) => state.boards[boardId].name);
   const starred = useSelector((state) => state.boards[boardId].starred);
@@ -34,14 +38,6 @@ const Board = ({ boardId }) => {
   useEffect(() => {
     dispatch(UPDATEBOARD({ boardId, newValues: { accessed: new Date() } }));
   }, [boardId, dispatch]);
-
-  const handleAddList = () => {
-    setIsAdding(true);
-  };
-
-  const handleChange = (e) => {
-    setListName(e.target.value);
-  };
 
   const handleSaveList = (e) => {
     if (!e.key || e.key === 'Enter') {
@@ -77,6 +73,25 @@ const Board = ({ boardId }) => {
     dispatch(UPDATEBOARD({ boardId, newValues: { starred: !starred } }));
   };
 
+  const handleStartBoardEdit = () => {
+    setIsEditingBoard(true);
+    setEditBoardId(boardId);
+  };
+
+  const handleSaveBoardEdit = (e) => {
+    if (!e.key || e.key === 'Enter') {
+      if (boardText) {
+        dispatch(UPDATEBOARD({ boardId: editBoardId, newValues: { name: boardText } }));
+        setBoardText(null);
+        setEditBoardId(null);
+        setIsEditingBoard(false);
+      } else {
+        setBoardText(null);
+        setIsEditingBoard(false);
+      }
+    }
+  };
+
   return (
     <>
       <div className="board d-flex flex-column w-100 h-100 pb-2 px-2">
@@ -84,8 +99,24 @@ const Board = ({ boardId }) => {
          * Board Header
          */}
         <div className="row mx-0 mb-3 align-items-center text-white">
-          <div className="col-auto ps-0">
-            <h2>{name}</h2>
+          {/**
+           * board title edit
+           */}
+          <div className="col-auto ps-0" onClick={handleStartBoardEdit} role="button">
+            {isEditingBoard ? (
+              <textarea
+                placeholder="Enter board title..."
+                className={`${styles.board_textarea} form-control h3 ps-0 pt-1`}
+                defaultValue={boardText || name}
+                onChange={(e) => setBoardText(e.target.value)}
+                onKeyPress={handleSaveBoardEdit}
+                onBlur={handleSaveBoardEdit}
+                maxLength={19}
+                autoFocus
+              />
+            ) : (
+              <h2>{name}</h2>
+            )}
           </div>
           <div className="col-auto">
             <button type="button" className="btn" onClick={handleStarred}>
@@ -138,7 +169,7 @@ const Board = ({ boardId }) => {
                     className="form-control"
                     placeholder="Enter list title..."
                     autoFocus
-                    onChange={handleChange}
+                    onChange={(e) => setListName(e.target.value)}
                     onBlur={handleCancelList}
                     onKeyPress={handleSaveList}
                   />
@@ -159,7 +190,7 @@ const Board = ({ boardId }) => {
             ) : (
               <Button
                 className={`${styles.board_list_add} text-start text-white bg-trans bg-trans-hover border-0 px-3 text-decoration-none`}
-                onClick={handleAddList}
+                onClick={() => setIsAdding(true)}
               >
                 <FontAwesomeIcon icon="plus" className="small" />
                 {lists?.length ? ' Add another list' : ' Add a list'}
