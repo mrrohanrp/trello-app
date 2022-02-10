@@ -1,5 +1,7 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { UPDATEUI } from '../store/actions';
+
 import BoardCreateModal from '../components/home/BoardCreateModal';
 import BoardDisplay from '../components/home/BoardDisplay';
 import BoardsSection from '../components/home/BoardsSection';
@@ -12,6 +14,11 @@ const HomePage = () => {
     .filter((id) => !starred.includes(id) && boardsUS[id].accessed)
     .sort((a, b) => boardsUS[b].accessed - boardsUS[a].accessed)
     .slice(0, 4);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(UPDATEUI({ color: 'blue', img: null }));
+  }, [dispatch]);
 
   return (
     <div className="content container-fluid py-4 bg-white">
