@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { UPDATEBOARD, UPDATEUI } from '../../store/actions';
+import { UPDATEBOARD } from '../../store/actions';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './BoardDisplay.module.scss';
@@ -26,9 +26,6 @@ export const BoardDisplay = ({ boardId }) => {
         className={`btn btn-block text-start h-100 w-100  ${
           img ? `bg-img-small-${img} position-relative` : `bg-${color} bg-${color}-hover`
         }`}
-        onClick={() => {
-          dispatch(UPDATEUI({ color, img }));
-        }}
       >
         <div
           className={`container h-100 px-0 ${styles.board_tile} ${
