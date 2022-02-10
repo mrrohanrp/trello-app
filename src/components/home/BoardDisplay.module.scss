@@ -1,3 +1,7 @@
+.board_display {
+  height: 6rem;
+}
+
 .board_tile {
   &:hover {
     & .board_star_icon {

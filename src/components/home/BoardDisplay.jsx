@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { UPDATEBOARD, UPDATEUI } from '../../store/actions';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './BoardDisplay.module.scss';
 
@@ -19,7 +19,7 @@ export const BoardDisplay = ({ boardId }) => {
 
   const dispatch = useDispatch();
   return (
-    <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6 my-2" style={{ height: '6rem' }}>
+    <div className={`${styles.board_display} col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3 pe-1`}>
       <Link
         to={`board/${boardId}/${name}`}
         role="button"
@@ -36,7 +36,9 @@ export const BoardDisplay = ({ boardId }) => {
           }`}
         >
           <div className="row mx-0 h-75">
-            <p className="board-display-title fw-bolder h5 h-100 text-white text-break">{name}</p>
+            <p className="fw-bolder h5 h-100 text-white text-break" style={{ zIndex: '1000' }}>
+              {name}
+            </p>
           </div>
           <div className="d-flex justify-content-end">
             <button

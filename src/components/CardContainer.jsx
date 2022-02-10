@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { useDrop } from 'react-dnd';
 import { ADDCARD, MOVECARD, REMOVECARD } from '../store/actions';
+import { useDrop } from 'react-dnd';
 import styles from './CardContainer.module.scss';
 
 const propTypes = {
@@ -37,7 +37,7 @@ const CardContainer = ({ listId, index, children }) => {
   });
 
   return (
-    <div ref={drop} className="pb-2">
+    <div ref={drop} className="card-container pb-1">
       {/**
        * Card drop preview
        */}

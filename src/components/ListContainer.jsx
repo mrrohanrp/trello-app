@@ -14,7 +14,7 @@ const propTypes = {
   children: PropTypes.node
 };
 
-const ListContainer = ({ boardId, index, children }) => {
+const ListContainer = ({ boardId, index, mods, children }) => {
   const dispatch = useDispatch();
 
   const [{ isOver }, drop] = useDrop({
@@ -32,7 +32,7 @@ const ListContainer = ({ boardId, index, children }) => {
   });
 
   return (
-    <div ref={drop} className="pb-1">
+    <div ref={drop} className={`list-container ${mods} pb-1`}>
       {/**
        * List drop preview
        */}

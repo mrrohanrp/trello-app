@@ -2,14 +2,16 @@ import React, { useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { CREATECARD, DELETECARD, UPDATECARD } from '../store/actions';
+
 import Card from './Card';
 import CardInput from './CardInput';
-import styles from './List.module.scss';
-import { Button } from 'react-bootstrap';
-import { getNewId } from '../utils/utils';
 import CardContainer from './CardContainer';
-import { useDrag } from 'react-dnd';
+import { getNewId } from '../utils/utils';
 import { ScrollY } from './ui/Scroll';
+import styles from './List.module.scss';
+
+import { useDrag } from 'react-dnd';
+import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const propTypes = {
@@ -96,21 +98,15 @@ const List = ({ listId, boardId, onDeleteList }) => {
   });
 
   return (
-    <div
-      ref={drag}
-      className={`${styles.list} card ${isDragging ? 'd-none' : ''}`}
-      style={{ maxHeight: 'calc(100vh - 155px)' }}
-    >
-      <div className="card-title container px-0">
-        <div className="d-flex mx-0">
-          <span className="card-title mb-0 ms-3 mt-2 h6">{name}</span>
-          <button
-            onClick={() => onDeleteList(listId, cards)}
-            className={`${styles.delete_list_btn} btn px-2 ms-auto`}
-          >
-            <FontAwesomeIcon className="text-trans-dark text-trans-dark-hover" icon="trash" />
-          </button>
-        </div>
+    <div ref={drag} className={`${styles.list} card ${isDragging ? 'd-none' : ''}`}>
+      <div className="card-title d-flex px-0 pt-1">
+        <h3 className="card-title mb-0 ms-3 mt-2">{name}</h3>
+        <button
+          onClick={() => onDeleteList(listId, cards)}
+          className={`${styles.delete_list_btn} btn px-2 ms-auto`}
+        >
+          <FontAwesomeIcon className="text-trans-dark text-trans-dark-hover" icon="trash" />
+        </button>
       </div>
       {/**
        * multiple editable cards in the list
@@ -198,14 +194,14 @@ const List = ({ listId, boardId, onDeleteList }) => {
         </div>
       ) : (
         <div
-          className={`${styles.list_footer} card-footer text-secondary p-2 border-top-0 px-3 text-decoration-none`}
+          className={`${styles.list_footer} card-footer text-secondary border-top-0 px-4 pb-3 pt-0 text-decoration-none`}
           role="button"
           tabIndex={0}
           onKeyPress={handleAddCard}
           onClick={handleAddCard}
         >
           <FontAwesomeIcon icon="plus" className="small" />
-          {cards?.length ? ' Add another card' : ' Add a card'}
+          {' Add a card'}
         </div>
       )}
     </div>

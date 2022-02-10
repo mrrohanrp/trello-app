@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import List from './List';
-import styles from './Board.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { CREATELIST, DELETELIST, UPDATEBOARD, DELETEBOARD, UPDATEUI } from '../store/actions';
-import { Button } from 'react-bootstrap';
-import { getNewId } from '../utils/utils';
 import { Link } from 'react-router-dom';
+
+import List from './List';
 import ListContainer from './ListContainer';
+import { getNewId } from '../utils/utils';
 import { ScrollX } from './ui/Scroll';
+import styles from './Board.module.scss';
+
+import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const propTypes = {
@@ -78,13 +80,13 @@ const Board = ({ boardId }) => {
   return (
     <>
       {lists ? (
-        <div className="d-flex flex-column w-100 h-100 pb-2 px-2">
+        <div className="board d-flex flex-column w-100 h-100 pb-2 px-2">
           {/**
            * Board Header
            */}
           <div className="row mx-0 mb-3 align-items-center text-white">
-            <div className="col-auto">
-              <h3>{name}</h3>
+            <div className="col-auto ps-0">
+              <h2>{name}</h2>
             </div>
             <div className="col-auto">
               <button type="button" className="btn" onClick={handleStarred}>
@@ -96,7 +98,7 @@ const Board = ({ boardId }) => {
                 />
               </button>
             </div>
-            <div className="col-auto ms-auto">
+            <div className="col-auto ms-auto pe-0">
               <Link type="button" className="btn" onClick={handleDeleteBoard} to="/">
                 <FontAwesomeIcon icon="fa-solid fa-trash" className="text-trans text-trans-hover" />
               </Link>
@@ -108,11 +110,14 @@ const Board = ({ boardId }) => {
              * for list
              */}
             {lists.map((listId, index) => (
-              <div className="col-auto ms-0 me-2 px-0" key={listId}>
-                <ListContainer index={index} boardId={boardId}>
-                  <List boardId={boardId} listId={listId} onDeleteList={handleDeleteList} />
-                </ListContainer>
-              </div>
+              <ListContainer
+                index={index}
+                boardId={boardId}
+                key={listId}
+                mods="col-auto ms-0 me-2 px-0"
+              >
+                <List boardId={boardId} listId={listId} onDeleteList={handleDeleteList} />
+              </ListContainer>
             ))}
 
             <ListContainer index={lists.length} boardId={boardId} />
@@ -166,7 +171,7 @@ const Board = ({ boardId }) => {
         </div>
       ) : (
         /**
-         * show if board not found
+         * show if board not found FIXME:
          */
         <div className="row justify-content-center text-center">
           <div className="d-flex flex-column">

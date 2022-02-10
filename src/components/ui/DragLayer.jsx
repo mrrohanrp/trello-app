@@ -1,8 +1,8 @@
 import React from 'react';
-import { useDragLayer } from 'react-dnd';
 import Card from '../Card';
-import styles from './DragLayer.module.scss';
 import List from '../List';
+import styles from './DragLayer.module.scss';
+import { useDragLayer } from 'react-dnd';
 
 function getCardPreviewStyle(offset) {
   const transform = `translate(${offset.x}px, ${offset.y}px) rotate(5deg)`;

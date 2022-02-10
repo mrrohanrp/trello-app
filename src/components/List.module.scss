@@ -1,8 +1,9 @@
-$list-width: 18rem;
+$list-width: 19.429rem;
 
 .list {
   background-color: #e1e3e6;
   width: $list-width;
+  max-height: calc(100vh - 143px);
 
   &:hover .delete_list_btn {
     opacity: 1;

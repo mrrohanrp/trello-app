@@ -15,11 +15,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.content {
-  flex: 1 0 auto;
-  position: relative;
-}
-
 ul,
 ol {
   list-style: none;
@@ -27,7 +22,7 @@ ol {
   margin: 0;
 }
 
-/* body,
+body,
 button,
 html,
 input,
@@ -37,7 +32,31 @@ textarea {
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-} */
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+label,
+legend {
+  color: #5e6c84;
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  margin-bottom: 4px;
+  margin-top: 12px;
+}
+
+.content {
+  flex: 1 0 auto;
+  position: relative;
+}
 
 .hover-transform {
   &:hover {

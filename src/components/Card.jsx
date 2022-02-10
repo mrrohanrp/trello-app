@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './Card.module.scss';
-import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { Button } from 'react-bootstrap';
 import { useDrag } from 'react-dnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styles from './Card.module.scss';
 
 const propTypes = {
   /** Card ID for Card List */
@@ -38,7 +38,7 @@ const Card = ({ cardId, listId, onClick }) => {
         <div className="col-1 px-0">
           <Button
             variant="light"
-            className={`${styles.card_edit_button} p-1`}
+            className={`${styles.card_edit_button} p-0`}
             onClick={() => onClick(cardId, description)}
           >
             <FontAwesomeIcon

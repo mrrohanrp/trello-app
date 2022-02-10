@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { CREATEBOARD } from '../../store/actions';
-import { Modal, Button } from 'react-bootstrap';
-import styles from './BoardCreateModal.module.scss';
+
 import { getNewId } from '../../utils/utils';
+import styles from './BoardCreateModal.module.scss';
+import { Modal, Button } from 'react-bootstrap';
 
 const colors = ['blue', 'orange', 'green', 'red', 'purple', 'pink', 'mint', 'sky', 'gray'];
 
@@ -56,13 +57,13 @@ const BoardCreateModal = () => {
 
   return (
     <>
-      <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6 my-2">
+      <div className={`${styles.board_create_modal} col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3 pe-1`}>
         <Button
-          variant="outline-primary"
+          variant="secondary"
           onClick={handleModalShow}
           className="btn btn-block text-start h-100 w-100"
         >
-          <p className="fw-bolder h5 h-100">Create new board</p>
+          <p className="fw-bolder h5 h-100 px-2">Create new board</p>
         </Button>
       </div>
 
