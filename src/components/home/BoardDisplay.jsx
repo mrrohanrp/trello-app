@@ -21,7 +21,7 @@ export const BoardDisplay = ({ boardId }) => {
   return (
     <div className={`${styles.board_display} col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3 pe-1`}>
       <Link
-        to={`board/${boardId}/${name}`}
+        to={`board/${boardId}`}
         role="button"
         className={`btn btn-block text-start h-100 w-100  ${
           img ? `bg-img-small-${img} position-relative` : `bg-${color} bg-${color}-hover`
