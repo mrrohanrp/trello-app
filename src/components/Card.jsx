@@ -17,13 +17,13 @@ const propTypes = {
 const Card = ({ cardId, listId, onClick }) => {
   const description = useSelector((state) => state.cards[cardId].description);
 
-  const [{ isDragging }, drag] = useDrag({
+  const [{ isDragging }, drag] = useDrag(() => ({
     type: 'CARD',
     item: { id: cardId, originId: listId, type: 'CARD' },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging()
     })
-  });
+  }));
 
   return (
     <div

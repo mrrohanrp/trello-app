@@ -103,13 +103,13 @@ const List = ({ listId, boardId, onDeleteList }) => {
     }
   };
 
-  const [{ isDragging }, drag] = useDrag({
+  const [{ isDragging }, drag] = useDrag(() => ({
     type: 'LIST',
     item: { id: listId, originId: boardId, type: 'LIST' },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging()
     })
-  });
+  }));
 
   return (
     <div ref={drag} className={`${styles.list} card ${isDragging ? 'd-none' : ''}`}>

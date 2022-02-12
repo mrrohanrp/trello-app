@@ -9,7 +9,8 @@ function getCardPreviewStyle(offset) {
   return {
     transform,
     WebkitTransform: transform,
-    width: '17rem'
+    minWidth: '18rem',
+    maxWidth: '18rem'
   };
 }
 
@@ -18,13 +19,13 @@ function renderItem(item, offSet) {
     switch (item.type) {
       case 'CARD':
         return (
-          <div style={getCardPreviewStyle(offSet)}>
+          <div className={`${styles.dragging_layer}`} style={getCardPreviewStyle(offSet)}>
             <Card cardId={item.id} />
           </div>
         );
       case 'LIST':
         return (
-          <div style={getCardPreviewStyle(offSet)}>
+          <div className={`${styles.dragging_layer}`} style={getCardPreviewStyle(offSet)}>
             <List listId={item.id} />
           </div>
         );
@@ -42,8 +43,7 @@ const DragLayer = () => {
     currentOffset: monitor.getSourceClientOffset()
   }));
 
-  if (!isDragging) return null;
-  return <div className={`${styles.dragging_layer}`}>{renderItem(item, currentOffset)}</div>;
+  return isDragging ? renderItem(item, currentOffset) : null;
 };
 
 export default DragLayer;

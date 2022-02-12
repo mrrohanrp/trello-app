@@ -17,7 +17,7 @@ const propTypes = {
 const ListContainer = ({ boardId, index, mods, children }) => {
   const dispatch = useDispatch();
 
-  const [{ isOver }, drop] = useDrop({
+  const [{ isOver }, drop] = useDrop(() => ({
     accept: 'LIST',
     drop(droppedItem) {
       if (droppedItem.originId !== boardId) {
@@ -29,7 +29,7 @@ const ListContainer = ({ boardId, index, mods, children }) => {
     collect: (monitor) => ({
       isOver: !!monitor.isOver()
     })
-  });
+  }));
 
   return (
     <div ref={drop} className={`list-container ${mods} pb-1`}>

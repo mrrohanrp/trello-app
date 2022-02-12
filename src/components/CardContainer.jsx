@@ -17,7 +17,7 @@ const propTypes = {
 const CardContainer = ({ listId, index, children }) => {
   const dispatch = useDispatch();
 
-  const [{ isOver, draggedItem }, drop] = useDrop({
+  const [{ isOver, draggedItem }, drop] = useDrop(() => ({
     accept: 'CARD',
     drop(droppedItem) {
       if (droppedItem.originId !== listId) {
@@ -30,7 +30,7 @@ const CardContainer = ({ listId, index, children }) => {
       isOver: !!monitor.isOver(),
       draggedItem: monitor.getItem()
     })
-  });
+  }));
 
   const description = useSelector((state) => {
     return isOver && state.cards[draggedItem.id].description;
