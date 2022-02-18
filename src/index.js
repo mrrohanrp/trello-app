@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
 import { DndProvider } from 'react-dnd';
 import { TouchBackend } from 'react-dnd-touch-backend';
@@ -18,9 +19,11 @@ const touchBackendOptions = {
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <DndProvider backend={TouchBackend} options={touchBackendOptions}>
-        <App />
-      </DndProvider>
+      <BrowserRouter>
+        <DndProvider backend={TouchBackend} options={touchBackendOptions}>
+          <App />
+        </DndProvider>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
