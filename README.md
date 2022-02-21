@@ -2,14 +2,26 @@
 
 ## [Live Link](https://mrrohanrp.github.io/trello-app/)
 
-## Available Scripts
+A Trello clone with basic functionality
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- [x] Header with gif on hover
+- [x] HomePage with multiple boards
+  - [x] Section-
+    - [x] starred boards
+    - [x] recently viewed
+    - [x] workspace
+  - [x] Add star to the board
+  - [x] Create Board-
+    - [x] with background image or color
+    - [x] Board title mandatory with default bg color blue
+    - [x] input and create button color changes with selected bg color
+- [x] BoardPage
+  - [x] Board Header
+    - [x] Update Board name on click
+    - [x] Add star
+    - [x] Delete Board
+- [x] Create, Update, Delete Cards as well as lists
+- [x] Drag and drop cards and lists with touch support
+- [x] use of Router, Redux and Local storage
