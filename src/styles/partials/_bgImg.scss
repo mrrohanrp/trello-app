@@ -1,19 +1,19 @@
 $img-urls: (
-  earth: url('../../assets/bg/1h-javier-miranda-Jn2EaLLYZfY-unsplash.jpg'),
-  beach: url('../../assets/bg/2h-geio-tischler-qA0ij7Dmu10-unsplash.jpg'),
-  vase: url('../../assets/bg/3h-ronald-cuyan-r3zwmXTXpmA-unsplash.jpg'),
-  balloon: url('../../assets/bg/4h-victoria-rokita-La2kOu2dmH4-unsplash.jpg'),
-  sunset: url('../../assets/bg/5h-frank-mckenna-4V8JxijgZ_c-unsplash.jpg'),
-  forest: url('../../assets/bg/6h-max-okhrimenko-R-CoXmMrWFk-unsplash.jpg')
+  earth: url('../../../public/assets/bg/1h-javier-miranda-Jn2EaLLYZfY-unsplash.jpg'),
+  beach: url('../../../public/assets/bg/2h-geio-tischler-qA0ij7Dmu10-unsplash.jpg'),
+  vase: url('../../../public/assets/bg/3h-ronald-cuyan-r3zwmXTXpmA-unsplash.jpg'),
+  balloon: url('../../../public/assets/bg/4h-victoria-rokita-La2kOu2dmH4-unsplash.jpg'),
+  sunset: url('../../../public/assets/bg/5h-frank-mckenna-4V8JxijgZ_c-unsplash.jpg'),
+  forest: url('../../../public/assets/bg/6h-max-okhrimenko-R-CoXmMrWFk-unsplash.jpg')
 );
 
 $img-small-urls: (
-  earth: url('../../assets/bg/1s-javier-miranda-Jn2EaLLYZfY-unsplash.jpg'),
-  beach: url('../../assets/bg/2s-geio-tischler-qA0ij7Dmu10-unsplash.jpg'),
-  vase: url('../../assets/bg/3s-ronald-cuyan-r3zwmXTXpmA-unsplash.jpg'),
-  balloon: url('../../assets/bg/4s-victoria-rokita-La2kOu2dmH4-unsplash.jpg'),
-  sunset: url('../../assets/bg/5s-frank-mckenna-4V8JxijgZ_c-unsplash.jpg'),
-  forest: url('../../assets/bg/6s-max-okhrimenko-R-CoXmMrWFk-unsplash.jpg')
+  earth: url('../../../public/assets/bg/1s-javier-miranda-Jn2EaLLYZfY-unsplash.jpg'),
+  beach: url('../../../public/assets/bg/2s-geio-tischler-qA0ij7Dmu10-unsplash.jpg'),
+  vase: url('../../../public/assets/bg/3s-ronald-cuyan-r3zwmXTXpmA-unsplash.jpg'),
+  balloon: url('../../../public/assets/bg/4s-victoria-rokita-La2kOu2dmH4-unsplash.jpg'),
+  sunset: url('../../../public/assets/bg/5s-frank-mckenna-4V8JxijgZ_c-unsplash.jpg'),
+  forest: url('../../../public/assets/bg/6s-max-okhrimenko-R-CoXmMrWFk-unsplash.jpg')
 );
 
 @each $img, $url in $img-urls {

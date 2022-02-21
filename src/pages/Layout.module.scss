@@ -2,13 +2,13 @@
   width: 75px;
   height: 15px;
   padding: 15px 0;
-  background-image: url('../assets/header_static.gif');
+  background-image: url('../../public/assets/header_static.gif');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
 
   &:hover,
   &:focus {
-    background-image: url('../assets/header_dynamic.gif');
+    background-image: url('../../public/assets/header_dynamic.gif');
   }
 }

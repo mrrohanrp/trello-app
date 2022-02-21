@@ -9,7 +9,7 @@ import NotFoundPage from './pages/NotFoundPage';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="/trello-app" element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route path="board/:bid" element={<BoardsPage />} />
         <Route path="*" element={<NotFoundPage />} />

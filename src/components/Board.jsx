@@ -129,7 +129,7 @@ const Board = ({ boardId }) => {
             </button>
           </div>
           <div className="col-auto ms-auto pe-0">
-            <Link type="button" className="btn" onClick={handleDeleteBoard} to="/">
+            <Link type="button" className="btn" onClick={handleDeleteBoard} to="/trello-app">
               <FontAwesomeIcon icon="fa-solid fa-trash" className="text-trans text-trans-hover" />
             </Link>
           </div>

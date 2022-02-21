@@ -14,7 +14,10 @@ const Layout = () => {
       <nav className={`navbar container-fluid bg-trans-dark`}>
         <ul className="navbar-nav d-flex flex-row">
           <li className="nav-item">
-            <Link to="/" className={`nav-link fw-bold text-white bg-trans-hover px-2 py-0 rounded`}>
+            <Link
+              to="/trello-app"
+              className={`nav-link fw-bold text-white bg-trans-hover px-2 py-0 rounded`}
+            >
               <div className={` ${styles.logo}`} />
             </Link>
           </li>
