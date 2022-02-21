@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/trello-app/static/css/main.079444c8.css",
+    "main.js": "/trello-app/static/js/main.a138de55.js",
+    "static/media/3h-ronald-cuyan-r3zwmXTXpmA-unsplash.jpg": "/trello-app/static/media/3h-ronald-cuyan-r3zwmXTXpmA-unsplash.5efce3dd4509a5c6b48d.jpg",
+    "static/media/2h-geio-tischler-qA0ij7Dmu10-unsplash.jpg": "/trello-app/static/media/2h-geio-tischler-qA0ij7Dmu10-unsplash.dfa35cf059a4d83f28ef.jpg",
+    "static/media/4h-victoria-rokita-La2kOu2dmH4-unsplash.jpg": "/trello-app/static/media/4h-victoria-rokita-La2kOu2dmH4-unsplash.48738b0aec1509de5f97.jpg",
+    "static/media/6h-max-okhrimenko-R-CoXmMrWFk-unsplash.jpg": "/trello-app/static/media/6h-max-okhrimenko-R-CoXmMrWFk-unsplash.0ebb2beeb1e2c309ae2c.jpg",
+    "static/media/5h-frank-mckenna-4V8JxijgZ_c-unsplash.jpg": "/trello-app/static/media/5h-frank-mckenna-4V8JxijgZ_c-unsplash.0b38e35e0d02300e1dc2.jpg",
+    "static/media/1h-javier-miranda-Jn2EaLLYZfY-unsplash.jpg": "/trello-app/static/media/1h-javier-miranda-Jn2EaLLYZfY-unsplash.8c3bc8d8319f2a4aab95.jpg",
+    "index.html": "/trello-app/index.html",
+    "main.079444c8.css.map": "/trello-app/static/css/main.079444c8.css.map",
+    "main.a138de55.js.map": "/trello-app/static/js/main.a138de55.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.079444c8.css",
+    "static/js/main.a138de55.js"
+  ]
+}
